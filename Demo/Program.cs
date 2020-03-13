@@ -63,7 +63,7 @@ namespace GenHTTP.Themes.Demo
 
         private static ITheme GetLorahost(IRouter content)
         {
-            return new LorahostBuilder().Title("Arcana Theme")
+            return new LorahostBuilder().Title("Lorahost Theme")
                                         .Subtitle("Yet another theme")
                                         .Copyright("Copyright 2020")
                                         .Action("content", "Link to content!")
