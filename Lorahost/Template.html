@@ -64,7 +64,7 @@
 
                             {{~ for item in menu ~}}
                     
-                                {{ active = (request.path | string.contains item.path) || ( ( request.path | string.ends_with("/") ) && ( (route item.path) == "./" ) ) }}
+                                {{ active = (request.target.path | string.contains item.path) || ( ( request.target.path | string.ends_with("/") ) && ( (route item.path) == "./" ) ) }}
                                                                                  
                                 {{ if item.children }}
                                     <li class="nav-item submenu dropdown{{ if active }} active{{ end }}">
@@ -97,7 +97,7 @@
 
     </header>
 
-    {{ isRoot = ( ( request.path | string.ends_with("/") ) && ( (route "{root}") == "./" ) )}}
+    {{ isRoot = ( ( request.target.path | string.ends_with("/") ) && ( (route "{website}") == "./" ) )}}
 
     <section class="hero-banner {{ if !isRoot }}hero-banner-sm {{ end }} text-center">
 

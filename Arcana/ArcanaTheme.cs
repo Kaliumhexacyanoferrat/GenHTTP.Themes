@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-using GenHTTP.Api.Modules;
-using GenHTTP.Api.Modules.Templating;
-using GenHTTP.Api.Modules.Websites;
+using GenHTTP.Api.Content;
+using GenHTTP.Api.Content.Templating;
+using GenHTTP.Api.Content.Websites;
 using GenHTTP.Api.Protocol;
-using GenHTTP.Api.Routing;
 
 using GenHTTP.Modules.Core;
-using GenHTTP.Modules.Core.Websites;
 using GenHTTP.Modules.Scriban;
 
 namespace GenHTTP.Modules.Themes.Arcana
@@ -19,8 +16,6 @@ namespace GenHTTP.Modules.Themes.Arcana
         private readonly string? _Title, _Copyright, _Footer1Title, _Footer2Title;
 
         private readonly IMenuProvider? _FooterMenu1, _FooterMenu2;
-
-        private readonly IRenderer<WebsiteModel> _Renderer;
 
         #region Supporting data structures
 
@@ -75,7 +70,11 @@ namespace GenHTTP.Modules.Themes.Arcana
             get { return new List<Style> { GetStyle("fontawesome.css"), GetStyle("main.css") }; }
         }
 
-        public IRouter Resources { get; }
+        public IHandlerBuilder? Resources { get; }
+
+        public IRenderer<ErrorModel> ErrorHandler { get; }
+
+        public IRenderer<WebsiteModel> Renderer { get; }
 
         #endregion
 
@@ -92,19 +91,16 @@ namespace GenHTTP.Modules.Themes.Arcana
             _FooterMenu2 = footerMenu2;
             _Footer2Title = footer2Title;
 
-            Resources = Resources = Static.Resources("Arcana.resources").Build();
+            Resources = Static.Resources("Arcana.resources");
 
-            _Renderer = new ScribanRenderer<WebsiteModel>(Data.FromResource("Template.html").Build());
+            ErrorHandler = ModScriban.Template<ErrorModel>(Data.FromResource("Error.html")).Build();
+
+            Renderer = ModScriban.Template<WebsiteModel>(Data.FromResource("Template.html")).Build();
         }
 
         #endregion
 
         #region Functionality
-
-        public IRenderer<WebsiteModel> GetRenderer()
-        {
-            return _Renderer;
-        }
 
         private static Script GetScript(string name)
         {
@@ -116,16 +112,10 @@ namespace GenHTTP.Modules.Themes.Arcana
             return new Style(name, Data.FromResource($"styles.{name}").Build());
         }
 
-        public IContentProvider? GetErrorHandler(IRequest request, ResponseStatus responseType, Exception? cause)
+        public object? GetModel(IRequest request, IHandler handler)
         {
-            return ModScriban.Page(Data.FromResource("Error.html"), (_) => new ErrorModel(request, responseType, cause))
-                             .Build();
-        }
-
-        public object? GetModel(IRequest request)
-        {
-            var footer1 = _FooterMenu1?.GetMenu(request);
-            var footer2 = _FooterMenu2?.GetMenu(request);
+            var footer1 = _FooterMenu1?.GetMenu(request, handler);
+            var footer2 = _FooterMenu2?.GetMenu(request, handler);
 
             return new ThemeModel(_Title, _Copyright, _Footer1Title, footer1, _Footer2Title, footer2);
         }

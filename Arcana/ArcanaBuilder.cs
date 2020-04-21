@@ -1,5 +1,5 @@
-﻿using GenHTTP.Api.Infrastructure;
-using GenHTTP.Api.Modules.Websites;
+﻿using GenHTTP.Api.Content.Websites;
+using GenHTTP.Api.Infrastructure;
 
 namespace GenHTTP.Modules.Themes.Arcana
 {

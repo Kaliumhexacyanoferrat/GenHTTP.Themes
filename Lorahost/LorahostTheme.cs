@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-using GenHTTP.Api.Modules;
-using GenHTTP.Api.Modules.Templating;
-using GenHTTP.Api.Modules.Websites;
+using GenHTTP.Api.Content;
+using GenHTTP.Api.Content.Templating;
+using GenHTTP.Api.Content.Websites;
 using GenHTTP.Api.Protocol;
-using GenHTTP.Api.Routing;
 
 using GenHTTP.Modules.Core;
-using GenHTTP.Modules.Core.Websites;
 using GenHTTP.Modules.Scriban;
 
 namespace GenHTTP.Modules.Themes.Lorahost
@@ -18,8 +15,6 @@ namespace GenHTTP.Modules.Themes.Lorahost
     {
         private readonly string? _Copyright, _Title, _Subtitle, _Action, _ActionTitle;
 
-        private readonly IRenderer<WebsiteModel> _Renderer;
-        
         #region Supporting data structures
 
         public class ThemeModel
@@ -75,7 +70,11 @@ namespace GenHTTP.Modules.Themes.Lorahost
             }
         }
 
-        public IRouter? Resources { get; }
+        public IHandlerBuilder? Resources { get; }
+
+        public IRenderer<ErrorModel> ErrorHandler { get; }
+
+        public IRenderer<WebsiteModel> Renderer { get; }
 
         #endregion
 
@@ -90,36 +89,27 @@ namespace GenHTTP.Modules.Themes.Lorahost
             _ActionTitle = actionTitle;
 
             var resources = Layout.Create()
-                                  .Default(Static.Resources("Lorahost.resources"));
+                                  .Fallback(Static.Resources("Lorahost.resources"));
 
             if (header != null)
             {
                 resources.Add("header.jpg", Download.From(header).Type(ContentType.ImageJpg));
             }
 
-            Resources = resources.Build();
+            Resources = resources;
 
-            _Renderer = new ScribanRenderer<WebsiteModel>(Data.FromResource("Template.html").Build());
+            ErrorHandler = ModScriban.Template<ErrorModel>(Data.FromResource("Error.html")).Build();
+
+            Renderer = ModScriban.Template<WebsiteModel>(Data.FromResource("Template.html")).Build();
         }
 
         #endregion
 
         #region Functionality
 
-        public object? GetModel(IRequest request)
+        public object? GetModel(IRequest request, IHandler handler)
         {
             return new ThemeModel(_Copyright, _Title, _Subtitle, _Action, _ActionTitle);
-        }
-
-        public IRenderer<WebsiteModel> GetRenderer()
-        {
-            return _Renderer;
-        }
-
-        public IContentProvider? GetErrorHandler(IRequest request, ResponseStatus responseType, Exception? cause)
-        {
-            return ModScriban.Page(Data.FromResource("Error.html"), (_) => new ErrorModel(request, responseType, cause))
-                             .Build();
         }
 
         private static Script GetScript(string name)

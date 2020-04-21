@@ -13,7 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenHTTP.Themes.Demo", "Demo\GenHTTP.Themes.Demo.csproj", "{B0D74C69-D64E-42CC-B2BF-D38315E53AD7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenHTTP.Themes.Demo", "Demo\GenHTTP.Themes.Demo.csproj", "{B0D74C69-D64E-42CC-B2BF-D38315E53AD7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

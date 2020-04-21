@@ -25,7 +25,7 @@
             {{ if model.title }}
             
                 <!-- Logo -->
-                <h1><a href="{{ route "{root}" }}" id="logo">{{ model.title }}</a></h1>
+                <h1><a href="{{ route "{website}" }}" id="logo">{{ model.title }}</a></h1>
             
             {{ end }}
 
@@ -36,7 +36,7 @@
 
                     {{~ for item in menu ~}}
                     
-                         {{ active = (request.path | string.contains item.path) || ( ( request.path | string.ends_with("/") ) && ( (route item.path) == "./" ) ) }}
+                         {{ active = (request.target.path | string.contains item.path) || ( ( request.target.path | string.ends_with("/") ) && ( (route item.path) == "./" ) ) }}
 
                          <li {{ if active }}class="current"{{ end }}>
                                                      

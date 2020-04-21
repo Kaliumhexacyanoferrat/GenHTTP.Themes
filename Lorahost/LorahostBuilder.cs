@@ -1,6 +1,6 @@
-﻿using GenHTTP.Api.Infrastructure;
-using GenHTTP.Api.Modules;
-using GenHTTP.Api.Modules.Websites;
+﻿using GenHTTP.Api.Content;
+using GenHTTP.Api.Content.Websites;
+using GenHTTP.Api.Infrastructure;
 
 namespace GenHTTP.Modules.Themes.Lorahost
 {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
-using GenHTTP.Api.Modules.Websites;
-using GenHTTP.Api.Routing;
+using GenHTTP.Api.Content;
+using GenHTTP.Api.Content.Websites;
 using GenHTTP.Core.Hosting;
 
 using GenHTTP.Modules.Core;
@@ -17,24 +17,25 @@ namespace GenHTTP.Themes.Demo
         public static int Main(string[] args)
         {
             return new ServerHost().Port(8080)
+                                   .Defaults()
                                    .Console()
 #if DEBUG
                                    .Development()
 #endif
-                                   .Router(Setup())
+                                   .Handler(Setup())
                                    .Run();
         }
 
-        private static IRouterBuilder Setup()
+        private static IHandlerBuilder Setup()
         {
             var content = Layout.Create()
-                                .Add("index", Page.From("Home", "This is the home page"), index: true)
+                                .Index(Page.From("Home", "This is the home page"))
                                 .Add("content", Page.From("Content", "This is additional content"));
 
             var main = Layout.Create()
-                             .Add("index", ModScriban.Page(Data.FromResource("Index.html")), index: true);
+                             .Index(ModScriban.Page(Data.FromResource("Index.html")).Title("GenHTTP Themes"));
 
-            foreach (var entry in GetThemes(content.Build()))
+            foreach (var entry in GetThemes())
             {
                 var website = Website.Create()
                                      .Theme(entry.Theme)
@@ -46,22 +47,24 @@ namespace GenHTTP.Themes.Demo
             return main;
         }
 
-        private static IEnumerable<(string Name, ITheme Theme)> GetThemes(IRouter content)
+        private static IEnumerable<(string Name, ITheme Theme)> GetThemes()
         {
-            yield return ("arcana", GetArcana(content));
-            yield return ("lorahost", GetLorahost(content));
+            yield return ("arcana", GetArcana());
+            yield return ("lorahost", GetLorahost());
         }
 
-        private static ITheme GetArcana(IRouter content)
+        private static ITheme GetArcana()
         {
+            var menu = Menu.From("{website}");
+
             return new ArcanaBuilder().Title("Arcana Theme")
                                       .Copyright("Copyright 2020")
-                                      .Footer1("Footer 1", Menu.From(content))
-                                      .Footer2("Footer 2", Menu.From(content))
+                                      .Footer1("Footer 1", menu)
+                                      .Footer2("Footer 2", menu)
                                       .Build();
         }
 
-        private static ITheme GetLorahost(IRouter content)
+        private static ITheme GetLorahost()
         {
             return new LorahostBuilder().Title("Lorahost Theme")
                                         .Subtitle("Yet another theme")
