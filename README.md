@@ -11,7 +11,7 @@ var theme = Theme.Create()
                  .Title("Website Title");
 
 var website = Website.Create()
-                     .Router(...)
+                     .Content(...)
                      .Theme(theme);
 ```
 
