@@ -4,10 +4,14 @@
 
 <head>
 
-    <title>{{ content.title }}</title>
+    <title>{{ content.meta.title }}</title>
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+    {{ if content.meta.description }}
+    <meta name="description" content="{{ content.meta.description }}" />
+    {{ end }}
 
     {{~ for style in styles ~}}
     <link rel="stylesheet" href="{{ route style.path }}" />
@@ -35,25 +39,25 @@
                 <ul>
 
                     {{~ for item in menu ~}}
-                    
-                         {{ active = (request.target.path | string.contains item.path) || ( ( request.target.path | string.ends_with("/") ) && ( (route item.path) == "./" ) ) }}
 
-                         <li {{ if active }}class="current"{{ end }}>
-                                                     
-                            {{ if item.children }}
-                                <a href="{{ route item.path }}">{{ item.title }}</a>   
-                                <ul>
-                                {{ for child in item.children }}                       
-                                    <li>
-                                        <a href="{{ route child.path }}">{{ child.title }}</a>
-                                    </li>
-                                {{ end }}
-                                </ul>
-                            {{ else }}
-                                <a href="{{ route item.path }}" {{ if active }}class="current"{{ end }}>{{ item.title }}</a>                                                        
+                    {{ active = ( request.target.path | string.contains item.path ) || ( ( route item.path ) == "./" && ( request.target.path | string.ends_with "/" ) ) }}
+
+                    <li {{ if active }} class="current" {{ end }}>
+
+                        {{ if item.children }}
+                        <a href="{{ route item.path }}">{{ item.details.title }}</a>
+                        <ul>
+                            {{ for child in item.children }}
+                            <li>
+                                <a href="{{ route child.path }}">{{ child.details.title }}</a>
+                            </li>
                             {{ end }}
+                        </ul>
+                        {{ else }}
+                        <a href="{{ route item.path }}" {{ if active }} class="current" {{ end }}>{{ item.details.title }}</a>
+                        {{ end }}
 
-                        </li>
+                    </li>
 
                     {{~ end ~}}
 

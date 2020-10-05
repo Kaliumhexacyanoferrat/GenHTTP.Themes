@@ -15,6 +15,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenHTTP.Themes.Demo", "Demo\GenHTTP.Themes.Demo.csproj", "{B0D74C69-D64E-42CC-B2BF-D38315E53AD7}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{9469B52A-A5D5-4DA1-A70B-B641B71EC860}"
+	ProjectSection(SolutionItems) = preProject
+		Resources\icon.png = Resources\icon.png
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,6 +41,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9469B52A-A5D5-4DA1-A70B-B641B71EC860} = {1F6A1650-BF71-434D-85AC-C2367C3A9A83}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {30253945-E0B9-4002-995F-7F7F01BF2C2D}

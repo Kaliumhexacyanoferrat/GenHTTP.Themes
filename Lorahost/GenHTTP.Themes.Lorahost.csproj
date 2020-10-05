@@ -8,9 +8,9 @@
     <Nullable>enable</Nullable>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 
-    <AssemblyVersion>3.0.0.0</AssemblyVersion>
-    <FileVersion>3.0.0.0</FileVersion>
-    <Version>3.0.0</Version>
+    <AssemblyVersion>4.0.0.0</AssemblyVersion>
+    <FileVersion>4.0.0.0</FileVersion>
+    <Version>4.0.0</Version>
 
     <Authors>Andreas Nägeli</Authors>
     <Company />
@@ -18,12 +18,15 @@
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://genhttp.org/</PackageProjectUrl>
 
+    <PackageTags>GenHTTP Website Theme</PackageTags>
     <Description>Arcana theme to be used with the website module of the GenHTTP webserver</Description>
 
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
 
+    <PackageIcon>icon.png</PackageIcon>
+    
   </PropertyGroup>
 
   <ItemGroup>
@@ -94,17 +97,18 @@
 
   <ItemGroup>
 
-    <None Include="..\LICENSE">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
+    <None Include="..\LICENSE" Pack="true" PackagePath="\" />
+    <None Include="..\Resources\icon.png" Pack="true" PackagePath="\" />
 
   </ItemGroup>
 
   <ItemGroup>
 
-    <PackageReference Include="GenHTTP.Api" Version="3.0.0" />
-    <PackageReference Include="GenHTTP.Modules.Scriban" Version="3.0.0" />
+    <PackageReference Include="GenHTTP.Api" Version="4.0.0" />
+    
+    <PackageReference Include="GenHTTP.Modules.IO" Version="4.0.0" />
+    <PackageReference Include="GenHTTP.Modules.Layouting" Version="4.0.0" />
+    <PackageReference Include="GenHTTP.Modules.Scriban" Version="4.0.0" />
     
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0">
       <PrivateAssets>all</PrivateAssets>

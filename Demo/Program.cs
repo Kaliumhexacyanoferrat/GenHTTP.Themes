@@ -2,10 +2,17 @@
 
 using GenHTTP.Api.Content;
 using GenHTTP.Api.Content.Websites;
-using GenHTTP.Core.Hosting;
 
-using GenHTTP.Modules.Core;
+using GenHTTP.Engine;
+
+using GenHTTP.Modules.IO;
 using GenHTTP.Modules.Scriban;
+using GenHTTP.Modules.Practices;
+using GenHTTP.Modules.Layouting;
+using GenHTTP.Modules.Websites;
+using GenHTTP.Modules.Placeholders;
+using GenHTTP.Modules.Core;
+
 using GenHTTP.Modules.Themes.Arcana;
 using GenHTTP.Modules.Themes.Lorahost;
 
@@ -16,7 +23,8 @@ namespace GenHTTP.Themes.Demo
     {
         public static int Main(string[] args)
         {
-            return new ServerHost().Port(8080)
+            
+            return Host.Create()
                                    .Defaults()
                                    .Console()
 #if DEBUG
@@ -28,18 +36,36 @@ namespace GenHTTP.Themes.Demo
 
         private static IHandlerBuilder Setup()
         {
+            var index = Page.From("Home", "This is the home page")
+                            .Description("Home Page");
+
+            var additional = Page.From("Content", "This is additional content")
+                                 .Description("Additional Content");
+
             var content = Layout.Create()
-                                .Index(Page.From("Home", "This is the home page"))
-                                .Add("content", Page.From("Content", "This is additional content"));
+                                .Add("one", additional)
+                                .Add("two", additional)
+                                .Add("three", additional);
+
+            var root = Layout.Create()
+                                .Index(index)
+                                .Add("content", content)
+                                .Add("other", additional);
 
             var main = Layout.Create()
                              .Index(ModScriban.Page(Data.FromResource("Index.html")).Title("GenHTTP Themes"));
 
+            var menu = Menu.Empty()
+                           .Add("{website}", "Home")
+                           .Add("content/", "Content", new List<(string, string)> { ("one/", "One"), ("two/", "Two"), ("three/", "Three") })
+                           .Add("other", "Other");
+                        
             foreach (var entry in GetThemes())
             {
                 var website = Website.Create()
                                      .Theme(entry.Theme)
-                                     .Content(content);
+                                     .Menu(menu)
+                                     .Content(root);
 
                 main.Add(entry.Name, website);
             }
