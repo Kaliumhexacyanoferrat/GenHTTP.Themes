@@ -8,9 +8,9 @@
     <Nullable>enable</Nullable>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 
-    <AssemblyVersion>4.0.0.0</AssemblyVersion>
-    <FileVersion>4.0.0.0</FileVersion>
-    <Version>4.0.0</Version>
+    <AssemblyVersion>4.0.1.0</AssemblyVersion>
+    <FileVersion>4.0.1.0</FileVersion>
+    <Version>4.0.1</Version>
 
     <Authors>Andreas Nägeli</Authors>
     <Company />
@@ -53,6 +53,7 @@
     <None Remove="scripts\mail-script.js" />
     <None Remove="scripts\main.js" />
     <None Remove="scripts\owl.carousel.js" />
+    <None Remove="styles\additions.css" />
     <None Remove="styles\bootstrap.css" />
     <None Remove="styles\fontawesome.css" />
     <None Remove="styles\owl.carousel.css" />
@@ -86,6 +87,7 @@
     <EmbeddedResource Include="scripts\mail-script.js" />
     <EmbeddedResource Include="scripts\main.js" />
     <EmbeddedResource Include="scripts\owl.carousel.js" />
+    <EmbeddedResource Include="styles\additions.css" />
     <EmbeddedResource Include="styles\bootstrap.css" />
     <EmbeddedResource Include="styles\fontawesome.css" />
     <EmbeddedResource Include="styles\owl.carousel.css" />

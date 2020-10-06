@@ -66,7 +66,8 @@ namespace GenHTTP.Modules.Themes.Lorahost
                 {
                     GetStyle("bootstrap.css"), GetStyle("fontawesome.css"),
                     GetStyle("owl.carousel.css"), GetStyle("owl.theme.default.css"),
-                    GetStyle("themify.css"), GetStyle("style.css")
+                    GetStyle("themify.css"), GetStyle("style.css"),
+                    GetStyle("additions.css")
                 };
             }
         }
