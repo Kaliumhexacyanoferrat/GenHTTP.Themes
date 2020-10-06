@@ -4,8 +4,8 @@ using GenHTTP.Api.Content;
 using GenHTTP.Api.Content.Templating;
 using GenHTTP.Api.Content.Websites;
 using GenHTTP.Api.Protocol;
-
-using GenHTTP.Modules.Core;
+using GenHTTP.Modules.IO;
+using GenHTTP.Modules.Layouting;
 using GenHTTP.Modules.Scriban;
 
 namespace GenHTTP.Modules.Themes.Lorahost
@@ -13,7 +13,7 @@ namespace GenHTTP.Modules.Themes.Lorahost
 
     public class LorahostTheme : ITheme
     {
-        private readonly string? _Copyright, _Title, _Subtitle, _Action, _ActionTitle;
+        private readonly string? _Copyright, _Title, _Subtitle, _Action, _ActionTitle, _Description;
 
         #region Supporting data structures
 
@@ -29,14 +29,17 @@ namespace GenHTTP.Modules.Themes.Lorahost
             public string? Action { get; }
 
             public string? ActionTitle { get; }
+            public string? Description { get; }
 
-            public ThemeModel(string? copyright, string? title, string? subtitle, string? action, string? actionTitle)
+            public ThemeModel(string? copyright, string? title, string? subtitle, string? action, string? actionTitle,
+                string? description)
             {
                 Copyright = copyright;
                 Title = title;
                 Subtitle = subtitle;
                 Action = action;
                 ActionTitle = actionTitle;
+                Description = description;
             }
 
         }
@@ -80,13 +83,15 @@ namespace GenHTTP.Modules.Themes.Lorahost
 
         #region Initialization
 
-        public LorahostTheme(IResourceProvider? header, string? copyright, string? title, string? subtitle, string? action, string? actionTitle)
+        public LorahostTheme(IResourceProvider? header, string? copyright, string? title, string? subtitle, string? action,
+            string? actionTitle, string? description)
         {
             _Copyright = copyright;
             _Title = title;
             _Subtitle = subtitle;
             _Action = action;
             _ActionTitle = actionTitle;
+            _Description = description;
 
             var resources = Layout.Create()
                                   .Fallback(Static.Resources("Lorahost.resources"));
@@ -109,7 +114,7 @@ namespace GenHTTP.Modules.Themes.Lorahost
 
         public object? GetModel(IRequest request, IHandler handler)
         {
-            return new ThemeModel(_Copyright, _Title, _Subtitle, _Action, _ActionTitle);
+            return new ThemeModel(_Copyright, _Title, _Subtitle, _Action, _ActionTitle, _Description);
         }
 
         private static Script GetScript(string name)

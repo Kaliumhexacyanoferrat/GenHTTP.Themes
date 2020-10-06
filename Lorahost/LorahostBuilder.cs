@@ -7,7 +7,7 @@ namespace GenHTTP.Modules.Themes.Lorahost
 
     public class LorahostBuilder : IThemeBuilder<LorahostTheme>
     {
-        private string? _Copyright, _Title, _Subtitle, _Action, _ActionTitle;
+        private string? _Copyright, _Title, _Subtitle, _Action, _ActionTitle, _Description;
 
         private IResourceProvider? _Header;
 
@@ -16,6 +16,12 @@ namespace GenHTTP.Modules.Themes.Lorahost
         public LorahostBuilder Copyright(string copyright)
         {
             _Copyright = copyright;
+            return this;
+        }
+
+        public LorahostBuilder Description(string description)
+        {
+            _Description = description;
             return this;
         }
 
@@ -48,7 +54,7 @@ namespace GenHTTP.Modules.Themes.Lorahost
 
         public ITheme Build()
         {
-            return new LorahostTheme(_Header, _Copyright, _Title, _Subtitle, _Action, _ActionTitle);
+            return new LorahostTheme(_Header, _Copyright, _Title, _Subtitle, _Action, _ActionTitle, _Description);
         }
 
         #endregion

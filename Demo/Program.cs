@@ -2,12 +2,16 @@
 
 using GenHTTP.Api.Content;
 using GenHTTP.Api.Content.Websites;
-using GenHTTP.Core.Hosting;
-
+using GenHTTP.Engine.Hosting;
 using GenHTTP.Modules.Core;
+using GenHTTP.Modules.IO;
+using GenHTTP.Modules.Layouting;
+using GenHTTP.Modules.Placeholders;
+using GenHTTP.Modules.Practices;
 using GenHTTP.Modules.Scriban;
 using GenHTTP.Modules.Themes.Arcana;
 using GenHTTP.Modules.Themes.Lorahost;
+using GenHTTP.Modules.Websites;
 
 namespace GenHTTP.Themes.Demo
 {
@@ -61,6 +65,7 @@ namespace GenHTTP.Themes.Demo
                                       .Copyright("Copyright 2020")
                                       .Footer1("Footer 1", menu)
                                       .Footer2("Footer 2", menu)
+                                      .Description("Description meta")
                                       .Build();
         }
 
@@ -71,6 +76,7 @@ namespace GenHTTP.Themes.Demo
                                         .Copyright("Copyright 2020")
                                         .Action("content", "Link to content!")
                                         .Header(Data.FromResource("header.jpg"))
+                                        .Description("Description meta")
                                         .Build();
         }
 

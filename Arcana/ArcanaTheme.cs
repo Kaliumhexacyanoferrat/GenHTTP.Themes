@@ -4,8 +4,7 @@ using GenHTTP.Api.Content;
 using GenHTTP.Api.Content.Templating;
 using GenHTTP.Api.Content.Websites;
 using GenHTTP.Api.Protocol;
-
-using GenHTTP.Modules.Core;
+using GenHTTP.Modules.IO;
 using GenHTTP.Modules.Scriban;
 
 namespace GenHTTP.Modules.Themes.Arcana
@@ -13,7 +12,7 @@ namespace GenHTTP.Modules.Themes.Arcana
 
     public class ArcanaTheme : ITheme
     {
-        private readonly string? _Title, _Copyright, _Footer1Title, _Footer2Title;
+        private readonly string? _Title, _Copyright, _Footer1Title, _Footer2Title, _Description;
 
         private readonly IMenuProvider? _FooterMenu1, _FooterMenu2;
 
@@ -21,7 +20,6 @@ namespace GenHTTP.Modules.Themes.Arcana
 
         public class ThemeModel
         {
-
             public string? Title { get; }
 
             public string? Copyright { get; }
@@ -33,8 +31,9 @@ namespace GenHTTP.Modules.Themes.Arcana
             public string? Title2 { get; }
 
             public List<ContentElement>? Footer2 { get; }
+            public string? Description { get; }
 
-            public ThemeModel(string? title, string? copyright, string? footer1Title, List<ContentElement>? footer1, string? footer2Title, List<ContentElement>? footer2)
+            public ThemeModel(string? title, string? copyright, string? footer1Title, List<ContentElement>? footer1, string? footer2Title, List<ContentElement>? footer2, string? description)
             {
                 Title = title;
                 Copyright = copyright;
@@ -43,6 +42,7 @@ namespace GenHTTP.Modules.Themes.Arcana
                 Title1 = footer1Title;
 
                 Footer2 = footer2;
+                Description = description;
                 Title2 = footer2Title;
             }
 
@@ -80,7 +80,7 @@ namespace GenHTTP.Modules.Themes.Arcana
 
         #region Initialization
 
-        public ArcanaTheme(string? title, string? copyright, string? footer1Title, IMenuProvider? footerMenu1, string? footer2Title, IMenuProvider? footerMenu2)
+        public ArcanaTheme(string? title, string? copyright, string? footer1Title, IMenuProvider? footerMenu1, string? footer2Title, IMenuProvider? footerMenu2, string? description)
         {
             _Title = title;
             _Copyright = copyright;
@@ -89,6 +89,7 @@ namespace GenHTTP.Modules.Themes.Arcana
             _Footer1Title = footer1Title;
 
             _FooterMenu2 = footerMenu2;
+            _Description = description;
             _Footer2Title = footer2Title;
 
             Resources = Static.Resources("Arcana.resources");
@@ -117,7 +118,7 @@ namespace GenHTTP.Modules.Themes.Arcana
             var footer1 = _FooterMenu1?.GetMenu(request, handler);
             var footer2 = _FooterMenu2?.GetMenu(request, handler);
 
-            return new ThemeModel(_Title, _Copyright, _Footer1Title, footer1, _Footer2Title, footer2);
+            return new ThemeModel(_Title, _Copyright, _Footer1Title, footer1, _Footer2Title, footer2, _Description);
         }
 
         #endregion

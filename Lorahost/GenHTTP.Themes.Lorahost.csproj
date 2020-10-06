@@ -103,8 +103,12 @@
 
   <ItemGroup>
 
-    <PackageReference Include="GenHTTP.Api" Version="3.0.0" />
-    <PackageReference Include="GenHTTP.Modules.Scriban" Version="3.0.0" />
+    <PackageReference Include="GenHTTP.Api" Version="4.0.0" />
+
+    <PackageReference Include="GenHTTP.Modules.IO" Version="4.0.0" />
+
+    <PackageReference Include="GenHTTP.Modules.Layouting" Version="4.0.0" />
+    <PackageReference Include="GenHTTP.Modules.Scriban" Version="4.0.0" />
     
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0">
       <PrivateAssets>all</PrivateAssets>

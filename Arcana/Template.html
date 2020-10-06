@@ -7,6 +7,9 @@
     <title>{{ content.title }}</title>
 
     <meta charset="utf-8" />
+    {{ if model.description }}
+    <meta name="description" content="{{model.description}}" />
+    {{ end }}
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 
     {{~ for style in styles ~}}
