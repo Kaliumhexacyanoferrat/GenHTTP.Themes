@@ -1,13 +1,11 @@
-﻿using System.Collections.Generic;
-
-using GenHTTP.Api.Content;
+﻿using GenHTTP.Api.Content;
 using GenHTTP.Api.Content.Templating;
 using GenHTTP.Api.Content.Websites;
 using GenHTTP.Api.Protocol;
-
 using GenHTTP.Modules.IO;
 using GenHTTP.Modules.Layouting;
 using GenHTTP.Modules.Scriban;
+using System.Collections.Generic;
 
 namespace GenHTTP.Themes.AdminLTE
 {
@@ -38,9 +36,9 @@ namespace GenHTTP.Themes.AdminLTE
         {
             get
             {
-                return new List<Script>
+                return new List<Script> 
                 {
-
+                    GetScript("jquery.min.js"), GetScript("bootstrap.bundle.min.js"), GetScript("adminlte.min.js")
                 };
             }
         }
@@ -48,11 +46,11 @@ namespace GenHTTP.Themes.AdminLTE
         public List<Style> Styles
         {
             get
-            {
-                return new List<Style>
+            { 
+                return new List<Style> 
                 {
-
-                };
+                    GetStyle("fa-all.min.css") , GetStyle("adminlte.min.css") 
+                }; 
             }
         }
 

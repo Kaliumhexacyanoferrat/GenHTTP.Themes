@@ -31,11 +31,51 @@
 
   <ItemGroup>
     <None Remove="Error.html" />
+    <None Remove="resources\fonts\fa-brands-400.eot" />
+    <None Remove="resources\fonts\fa-brands-400.svg" />
+    <None Remove="resources\fonts\fa-brands-400.ttf" />
+    <None Remove="resources\fonts\fa-brands-400.woff" />
+    <None Remove="resources\fonts\fa-brands-400.woff2" />
+    <None Remove="resources\fonts\fa-regular-400.eot" />
+    <None Remove="resources\fonts\fa-regular-400.svg" />
+    <None Remove="resources\fonts\fa-regular-400.ttf" />
+    <None Remove="resources\fonts\fa-regular-400.woff" />
+    <None Remove="resources\fonts\fa-regular-400.woff2" />
+    <None Remove="resources\fonts\fa-solid-900.eot" />
+    <None Remove="resources\fonts\fa-solid-900.svg" />
+    <None Remove="resources\fonts\fa-solid-900.ttf" />
+    <None Remove="resources\fonts\fa-solid-900.woff" />
+    <None Remove="resources\fonts\fa-solid-900.woff2" />
+    <None Remove="scripts\adminlte.min.js" />
+    <None Remove="scripts\bootstrap.bundle.min.js" />
+    <None Remove="scripts\jquery.min.js" />
+    <None Remove="styles\adminlte.min.css" />
+    <None Remove="styles\fa-all.min.css" />
     <None Remove="Template.html" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Error.html" />
+    <EmbeddedResource Include="resources\fonts\fa-brands-400.eot" />
+    <EmbeddedResource Include="resources\fonts\fa-brands-400.svg" />
+    <EmbeddedResource Include="resources\fonts\fa-brands-400.ttf" />
+    <EmbeddedResource Include="resources\fonts\fa-brands-400.woff" />
+    <EmbeddedResource Include="resources\fonts\fa-brands-400.woff2" />
+    <EmbeddedResource Include="resources\fonts\fa-regular-400.eot" />
+    <EmbeddedResource Include="resources\fonts\fa-regular-400.svg" />
+    <EmbeddedResource Include="resources\fonts\fa-regular-400.ttf" />
+    <EmbeddedResource Include="resources\fonts\fa-regular-400.woff" />
+    <EmbeddedResource Include="resources\fonts\fa-regular-400.woff2" />
+    <EmbeddedResource Include="resources\fonts\fa-solid-900.eot" />
+    <EmbeddedResource Include="resources\fonts\fa-solid-900.svg" />
+    <EmbeddedResource Include="resources\fonts\fa-solid-900.ttf" />
+    <EmbeddedResource Include="resources\fonts\fa-solid-900.woff" />
+    <EmbeddedResource Include="resources\fonts\fa-solid-900.woff2" />
+    <EmbeddedResource Include="scripts\adminlte.min.js" />
+    <EmbeddedResource Include="scripts\bootstrap.bundle.min.js" />
+    <EmbeddedResource Include="scripts\jquery.min.js" />
+    <EmbeddedResource Include="styles\adminlte.min.css" />
+    <EmbeddedResource Include="styles\fa-all.min.css" />
     <EmbeddedResource Include="Template.html" />
   </ItemGroup>
 
