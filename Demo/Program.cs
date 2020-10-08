@@ -83,7 +83,7 @@ namespace GenHTTP.Themes.Demo
 
         private static ITheme GetAdminLTE()
         {
-            return new AdminLteBuilder().Title("Arcana Theme")
+            return new AdminLteBuilder().Title("AdminLTE Theme")
                                         .Build();
         }
 
