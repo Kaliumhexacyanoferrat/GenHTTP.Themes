@@ -35,6 +35,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Arcana\GenHTTP.Themes.Arcana.csproj" />
     <ProjectReference Include="..\Lorahost\GenHTTP.Themes.Lorahost.csproj" />
+    <ProjectReference Include="..\AdminLTE\GenHTTP.Themes.AdminLTE.csproj" />
   </ItemGroup>
 
 </Project>

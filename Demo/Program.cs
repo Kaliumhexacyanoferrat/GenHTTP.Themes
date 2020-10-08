@@ -15,6 +15,7 @@ using GenHTTP.Modules.Core;
 
 using GenHTTP.Modules.Themes.Arcana;
 using GenHTTP.Modules.Themes.Lorahost;
+using GenHTTP.Themes.AdminLTE;
 
 namespace GenHTTP.Themes.Demo
 {
@@ -75,8 +76,15 @@ namespace GenHTTP.Themes.Demo
 
         private static IEnumerable<(string Name, ITheme Theme)> GetThemes()
         {
+            yield return ("admin-lte", GetAdminLTE());
             yield return ("arcana", GetArcana());
             yield return ("lorahost", GetLorahost());
+        }
+
+        private static ITheme GetAdminLTE()
+        {
+            return new AdminLteBuilder().Title("Arcana Theme")
+                                        .Build();
         }
 
         private static ITheme GetArcana()
