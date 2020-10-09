@@ -8,7 +8,7 @@ using GenHTTP.Api.Protocol;
 using GenHTTP.Modules.IO;
 using GenHTTP.Modules.Scriban;
 
-namespace GenHTTP.Modules.Themes.Arcana
+namespace GenHTTP.Themes.Arcana
 {
 
     public class ArcanaTheme : ITheme

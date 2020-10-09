@@ -1,6 +1,4 @@
-﻿using GenHTTP.Modules.Themes.Lorahost;
-
-namespace GenHTTP.Themes.Lorahost
+﻿namespace GenHTTP.Themes.Lorahost
 {
 
     public static class Theme

@@ -1,6 +1,4 @@
-﻿using GenHTTP.Modules.Themes.Arcana;
-
-namespace GenHTTP.Themes.Arcana
+﻿namespace GenHTTP.Themes.Arcana
 {
 
     public static class Theme

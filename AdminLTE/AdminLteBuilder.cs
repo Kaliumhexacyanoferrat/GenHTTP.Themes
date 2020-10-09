@@ -1,8 +1,8 @@
-﻿using GenHTTP.Api.Content;
-using GenHTTP.Api.Content.Templating;
+﻿using System;
+
+using GenHTTP.Api.Content;
 using GenHTTP.Api.Content.Websites;
 using GenHTTP.Api.Protocol;
-using System;
 
 namespace GenHTTP.Themes.AdminLTE
 {

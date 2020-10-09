@@ -12,10 +12,9 @@ using GenHTTP.Modules.Layouting;
 using GenHTTP.Modules.Websites;
 using GenHTTP.Modules.Placeholders;
 using GenHTTP.Modules.Core;
-
-using GenHTTP.Modules.Themes.Arcana;
-using GenHTTP.Modules.Themes.Lorahost;
 using GenHTTP.Themes.AdminLTE;
+using GenHTTP.Themes.Arcana;
+using GenHTTP.Themes.Lorahost;
 
 namespace GenHTTP.Themes.Demo
 {

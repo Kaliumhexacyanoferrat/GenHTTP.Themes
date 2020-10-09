@@ -1,7 +1,7 @@
 ﻿using GenHTTP.Api.Content.Websites;
 using GenHTTP.Api.Infrastructure;
 
-namespace GenHTTP.Modules.Themes.Arcana
+namespace GenHTTP.Themes.Arcana
 {
 
     public class ArcanaBuilder : IThemeBuilder<ArcanaBuilder>
