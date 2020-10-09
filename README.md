@@ -21,6 +21,7 @@ The following themes are available in this repository.
 
 | Theme        | Package | Preview           | 
 | - |-| -|
+| [AdminLTE](https://github.com/Kaliumhexacyanoferrat/GenHTTP.Themes/tree/master/AdminLTE)      | [![nuget Package](https://img.shields.io/nuget/v/GenHTTP.Themes.AdminLTE.svg)](https://www.nuget.org/packages/GenHTTP.Themes.AdminLTE/)  | ![AdminLTE](https://raw.githubusercontent.com/Kaliumhexacyanoferrat/GenHTTP.Themes/master/Screenshots/admin-lte.png) |
 | [Arcana](https://github.com/Kaliumhexacyanoferrat/GenHTTP.Themes/tree/master/Arcana)      | [![nuget Package](https://img.shields.io/nuget/v/GenHTTP.Themes.Arcana.svg)](https://www.nuget.org/packages/GenHTTP.Themes.Arcana/)  | ![Arcana](https://raw.githubusercontent.com/Kaliumhexacyanoferrat/GenHTTP.Themes/master/Screenshots/arcana.png) |
 | [Lorahost](https://github.com/Kaliumhexacyanoferrat/GenHTTP.Themes/tree/master/Lorahost)      | [![nuget Package](https://img.shields.io/nuget/v/GenHTTP.Themes.Lorahost.svg)](https://www.nuget.org/packages/GenHTTP.Themes.Lorahost/)  | ![Lorahost](https://raw.githubusercontent.com/Kaliumhexacyanoferrat/GenHTTP.Themes/master/Screenshots/lorahost.png) |
 

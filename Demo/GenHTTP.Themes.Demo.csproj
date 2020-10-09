@@ -17,6 +17,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\AdminLTE\Notifications.html" />
     <None Remove="Resources\avatar.png" />
     <None Remove="Resources\header.jpg" />
     <None Remove="Resources\Index.html" />
@@ -24,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Resources\AdminLTE\Notifications.html" />
     <EmbeddedResource Include="Resources\avatar.png" />
     <EmbeddedResource Include="Resources\header.jpg" />
     <EmbeddedResource Include="Resources\logo.png" />

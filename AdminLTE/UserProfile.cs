@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GenHTTP.Themes.AdminLTE
+﻿namespace GenHTTP.Themes.AdminLTE
 {
-    
+
     public class UserProfile
     {
 

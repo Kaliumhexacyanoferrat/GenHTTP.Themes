@@ -19,7 +19,11 @@ namespace GenHTTP.Themes.AdminLTE
 
         private readonly Func<IRequest, IHandler, UserProfile?>? _UserProfile;
 
-        private readonly Func<IRequest, IHandler, string?>? _FooterLeft, _FooterRight;
+        private readonly Func<IRequest, IHandler, string?>? _FooterLeft, _FooterRight, _Sidebar, _Notifications;
+
+        private readonly Func<IRequest, IHandler, SearchBox?>? _SearchBox;
+
+        private readonly IMenuProvider? _HeaderMenu;
 
         #region Supporting data structures
 
@@ -36,8 +40,18 @@ namespace GenHTTP.Themes.AdminLTE
 
             public string? FooterRight { get; }
 
+            public string? Sidebar { get; }
+
+            public SearchBox? SearchBox { get; }
+
+            public List<ContentElement>? HeaderMenu { get; }
+
+            public string? Notifications { get; }
+
             public ThemeModel(string? title, bool hasLogo, UserProfile? userProfile, 
-                              string? footerLeft, string? footerRight)
+                              string? footerLeft, string? footerRight, string? sidebar,
+                              SearchBox? searchBox, List<ContentElement>? headerMenu,
+                              string? notifications)
             {
                 Title = title;
 
@@ -46,6 +60,12 @@ namespace GenHTTP.Themes.AdminLTE
 
                 FooterLeft = footerLeft;
                 FooterRight = footerRight;
+
+                Sidebar = sidebar;
+                SearchBox = searchBox;
+
+                HeaderMenu = headerMenu;
+                Notifications = notifications;
             }
 
         }
@@ -89,7 +109,9 @@ namespace GenHTTP.Themes.AdminLTE
         #region Initialization
 
         public AdminLteTheme(string? title, IHandlerBuilder? logo, Func<IRequest, IHandler, UserProfile?>? userProfile,
-            Func<IRequest, IHandler, string?>? footerLeft, Func<IRequest, IHandler, string?>? footerRight)
+            Func<IRequest, IHandler, string?>? footerLeft, Func<IRequest, IHandler, string?>? footerRight,
+            Func<IRequest, IHandler, string?>? sidebar, Func<IRequest, IHandler, SearchBox?>? searchBox,
+            Func<IRequest, IHandler, string?>? notifications, IMenuProvider? headerMenu)
         {
             _Title = title;
 
@@ -107,6 +129,12 @@ namespace GenHTTP.Themes.AdminLTE
 
             _FooterLeft = footerLeft;
             _FooterRight = footerRight;
+
+            _Sidebar = sidebar;
+            _SearchBox = searchBox;
+
+            _HeaderMenu = headerMenu;
+            _Notifications = notifications;
 
             Resources = resources;
 
@@ -126,7 +154,13 @@ namespace GenHTTP.Themes.AdminLTE
             var footerLeft = (_FooterLeft != null) ? _FooterLeft(request, handler) : null;
             var footerRight = (_FooterRight != null) ? _FooterRight(request, handler) : null;
 
-            return new ThemeModel(_Title, HasLogo, userProfile, footerLeft, footerRight);
+            var sidebar = (_Sidebar != null) ? _Sidebar(request, handler) : null;
+            var searchBox = (_SearchBox != null) ? _SearchBox(request, handler) : null;
+
+            var headerMenu = _HeaderMenu?.GetMenu(request, handler);
+            var notifications = (_Notifications != null) ? _Notifications(request, handler) : null;
+
+            return new ThemeModel(_Title, HasLogo, userProfile, footerLeft, footerRight, sidebar, searchBox, headerMenu, notifications);
         }
 
         private static Script GetScript(string name)

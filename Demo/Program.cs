@@ -15,6 +15,7 @@ using GenHTTP.Modules.Core;
 using GenHTTP.Themes.AdminLTE;
 using GenHTTP.Themes.Arcana;
 using GenHTTP.Themes.Lorahost;
+using GenHTTP.Api.Content.Templating;
 
 namespace GenHTTP.Themes.Demo
 {
@@ -45,7 +46,8 @@ namespace GenHTTP.Themes.Demo
             var content = Layout.Create()
                                 .Add("one", additional)
                                 .Add("two", additional)
-                                .Add("three", additional);
+                                .Add("three", additional)
+                                .Index(additional);
 
             var root = Layout.Create()
                                 .Index(index)
@@ -83,11 +85,21 @@ namespace GenHTTP.Themes.Demo
 
         private static ITheme GetAdminLTE()
         {
+            var menu = Menu.Empty()
+                           .Add("{website}/", "Home");
+
+            var notifications = ModScriban.Template<IBaseModel>(Data.FromResource("Notifications.html"))
+                                          .Build();
+
             return new AdminLteBuilder().Title("AdminLTE Theme")
                                         .Logo(Download.FromResource("logo.png"))
                                         .UserProfile((r, h) => new UserProfile("Some User", "/avatar.png", ""))
                                         .FooterLeft((r, h) => "Footer text on the left ...")
-                                        .FooterRight((r, h) => "... and on the right (theme by <a href=\"https://adminlte.io\" target=\"blank\">AdminLTE.io</a>)")
+                                        .FooterRight((r, h) => "... and on the right (template by <a href=\"https://adminlte.io\" target=\"blank\">AdminLTE.io</a>)")
+                                        .Sidebar((r, h) => "<h5>Sidebar Content</h5><p>This content is placed on the sidebar. Awesome.</p>")
+                                        .Search((r, h) => new SearchBox(""))
+                                        .Header(menu)
+                                        .Notifications((r, h) => notifications.Render(new ViewModel(r, h)))
                                         .Build();
         }
 
