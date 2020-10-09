@@ -5,6 +5,7 @@ using GenHTTP.Api.Protocol;
 using GenHTTP.Modules.IO;
 using GenHTTP.Modules.Layouting;
 using GenHTTP.Modules.Scriban;
+using System;
 using System.Collections.Generic;
 
 namespace GenHTTP.Themes.AdminLTE
@@ -13,6 +14,10 @@ namespace GenHTTP.Themes.AdminLTE
     public class AdminLteTheme : ITheme
     {
         private readonly string? _Title;
+
+        private readonly Func<IRequest, IHandler, UserProfile?>? _UserProfile;
+
+        private readonly Func<IRequest, IHandler, string?>? _FooterLeft, _FooterRight;
 
         #region Supporting data structures
 
@@ -23,11 +28,22 @@ namespace GenHTTP.Themes.AdminLTE
 
             public bool HasLogo { get; }
 
-            public ThemeModel(string? title, bool hasLogo)
+            public UserProfile? UserProfile { get; }
+
+            public string? FooterLeft { get; }
+
+            public string? FooterRight { get; }
+
+            public ThemeModel(string? title, bool hasLogo, UserProfile? userProfile, 
+                              string? footerLeft, string? footerRight)
             {
                 Title = title;
 
                 HasLogo = hasLogo;
+                UserProfile = userProfile;
+
+                FooterLeft = footerLeft;
+                FooterRight = footerRight;
             }
 
         }
@@ -70,7 +86,8 @@ namespace GenHTTP.Themes.AdminLTE
 
         #region Initialization
 
-        public AdminLteTheme(string? title, IHandlerBuilder? logo)
+        public AdminLteTheme(string? title, IHandlerBuilder? logo, Func<IRequest, IHandler, UserProfile?>? userProfile,
+            Func<IRequest, IHandler, string?>? footerLeft, Func<IRequest, IHandler, string?>? footerRight)
         {
             _Title = title;
 
@@ -83,6 +100,11 @@ namespace GenHTTP.Themes.AdminLTE
             {
                 resources.Add("logo.png", logo);
             }
+
+            _UserProfile = userProfile;
+
+            _FooterLeft = footerLeft;
+            _FooterRight = footerRight;
 
             Resources = resources;
 
@@ -97,7 +119,12 @@ namespace GenHTTP.Themes.AdminLTE
 
         public object? GetModel(IRequest request, IHandler handler)
         {
-            return new ThemeModel(_Title, HasLogo);
+            var userProfile = (_UserProfile != null) ? _UserProfile(request, handler) : null;
+
+            var footerLeft = (_FooterLeft != null) ? _FooterLeft(request, handler) : null;
+            var footerRight = (_FooterRight != null) ? _FooterRight(request, handler) : null;
+
+            return new ThemeModel(_Title, HasLogo, userProfile, footerLeft, footerRight);
         }
 
         private static Script GetScript(string name)

@@ -150,10 +150,10 @@
             </ul>
         </nav>
 
-        <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
 
-            <!-- Brand Logo -->
+            {{ if model.has_logo || model.title }}
+            
             <a href="{{ route '{website}/' }}" class="brand-link">
                 {{ if model.has_logo }}
                 <img src="{{ route 'resources/logo.png' }}" alt="Logo {{ model.title }}" class="brand-image img-circle elevation-3"
@@ -161,18 +161,24 @@
                 {{ end }}
                 <span class="brand-text font-weight-light">{{ model.title }}</span>
             </a>
+            
+            {{ end }}
 
             <!-- Sidebar -->
             <div class="sidebar">
-                <!-- Sidebar user panel (optional) -->
+
+                {{ if model.user_profile }}
+
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                        <img src="{{ route model.user_profile.avatar }}" class="img-circle elevation-2" alt="{{ model.user_profile.username }}">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">Alexander Pierce</a>
+                        <a href="{{ route model.user_profile.action }}" class="d-block">{{ model.user_profile.username }}</a>
                     </div>
                 </div>
+
+                {{ end }}
 
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
@@ -257,15 +263,22 @@
         </aside>
         <!-- /.control-sidebar -->
 
-        <!-- Main Footer -->
+        {{ if model.footer_left || model.footer_right }}
+
         <footer class="main-footer">
-            <!-- To the right -->
+
+            {{ if model.footer_right }}
             <div class="float-right d-none d-sm-inline">
-                Anything you want
+                {{ model.footer_right }}
             </div>
-            <!-- Default to the left -->
-            <strong>Copyright &copy; 2014-2019 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+            {{ end }}
+
+            {{ if model.footer_left }}
+                {{ model.footer_left }}
+            {{ end }}
         </footer>
+
+        {{ end }}
 
     </div>
 

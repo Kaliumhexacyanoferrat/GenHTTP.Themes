@@ -54,6 +54,7 @@ namespace GenHTTP.Themes.Demo
                                 .Add("other", additional);
 
             var main = Layout.Create()
+                             .Add("avatar.png", Download.FromResource("avatar.png"))
                              .Index(ModScriban.Page(Data.FromResource("Index.html")).Title("GenHTTP Themes"));
 
             var menu = Menu.Empty()
@@ -85,6 +86,9 @@ namespace GenHTTP.Themes.Demo
         {
             return new AdminLteBuilder().Title("AdminLTE Theme")
                                         .Logo(Download.FromResource("logo.png"))
+                                        .UserProfile((r, h) => new UserProfile("Some User", "/avatar.png", ""))
+                                        .FooterLeft((r, h) => "Footer text on the left ...")
+                                        .FooterRight((r, h) => "... and on the right (theme by <a href=\"https://adminlte.io\" target=\"blank\">AdminLTE.io</a>)")
                                         .Build();
         }
 

@@ -1,5 +1,8 @@
 ﻿using GenHTTP.Api.Content;
+using GenHTTP.Api.Content.Templating;
 using GenHTTP.Api.Content.Websites;
+using GenHTTP.Api.Protocol;
+using System;
 
 namespace GenHTTP.Themes.AdminLTE
 {
@@ -9,6 +12,10 @@ namespace GenHTTP.Themes.AdminLTE
         private string? _Title;
 
         private IHandlerBuilder? _Logo;
+
+        private Func<IRequest, IHandler, UserProfile?>? _UserProfile;
+
+        private Func<IRequest, IHandler, string?>? _FooterLeft, _FooterRight;
 
         #region Functionality
 
@@ -32,9 +39,27 @@ namespace GenHTTP.Themes.AdminLTE
             return this;
         }
 
+        public AdminLteBuilder UserProfile(Func<IRequest, IHandler, UserProfile?> provider)
+        {
+            _UserProfile = provider;
+            return this;
+        }
+
+        public AdminLteBuilder FooterLeft(Func<IRequest, IHandler, string?> provider)
+        {
+            _FooterLeft = provider;
+            return this;
+        }
+
+        public AdminLteBuilder FooterRight(Func<IRequest, IHandler, string?> provider)
+        {
+            _FooterRight = provider;
+            return this;
+        }
+
         public ITheme Build()
         {
-            return new AdminLteTheme(_Title, _Logo);
+            return new AdminLteTheme(_Title, _Logo, _UserProfile, _FooterLeft, _FooterRight);
         }
 
         #endregion
