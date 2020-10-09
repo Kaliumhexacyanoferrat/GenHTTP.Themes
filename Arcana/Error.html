@@ -9,20 +9,14 @@
                 <header>
                     <h2>{{ status }}</h2>
                 </header>
-                
-                <p>
-                    {{
-                        if cause != null
-                            if request.server.development
-                                cause
-                            else 
-                                cause.message
-                            end
-                        else
-                            "The server was unable to process the request."
-                        end
-                    }}
-                </p>
+
+                <p>{{ message }}</p>
+
+                {{ if cause && request.server.development }}
+                    <p>
+                        <pre>{{ cause }}</pre>
+                    </p>
+                {{ end }}
 
             </article>
 
