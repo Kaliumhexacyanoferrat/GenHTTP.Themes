@@ -2,7 +2,7 @@
 using GenHTTP.Api.Content.Websites;
 using GenHTTP.Api.Infrastructure;
 
-namespace GenHTTP.Modules.Themes.Lorahost
+namespace GenHTTP.Themes.Lorahost
 {
 
     public class LorahostBuilder : IThemeBuilder<LorahostTheme>

@@ -1,0 +1,9 @@
+﻿<h2>{{ status }}</h2>
+
+<p>{{ message }}</p>
+
+{{ if cause && request.server.development }}
+<p>
+    <pre>{{ cause }}</pre>
+</p>
+{{ end }}
