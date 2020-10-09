@@ -19,10 +19,12 @@
   <ItemGroup>
     <None Remove="Resources\header.jpg" />
     <None Remove="Resources\Index.html" />
+    <None Remove="Resources\logo.png" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Resources\header.jpg" />
+    <EmbeddedResource Include="Resources\logo.png" />
     <EmbeddedResource Include="Resources\Index.html" />
   </ItemGroup>
 

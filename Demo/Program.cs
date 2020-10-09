@@ -84,6 +84,7 @@ namespace GenHTTP.Themes.Demo
         private static ITheme GetAdminLTE()
         {
             return new AdminLteBuilder().Title("AdminLTE Theme")
+                                        .Logo(Download.FromResource("logo.png"))
                                         .Build();
         }
 
