@@ -91,11 +91,11 @@ namespace GenHTTP.Themes.Arcana
             _FooterMenu2 = footerMenu2;
             _Footer2Title = footer2Title;
 
-            Resources = Static.Resources("Arcana.resources");
+            Resources = Modules.IO.Resources.From(ResourceTree.FromAssembly("Arcana.resources"));
 
-            ErrorHandler = ModScriban.Template<ErrorModel>(Data.FromResource("Error.html")).Build();
+            ErrorHandler = ModScriban.Template<ErrorModel>(Resource.FromAssembly("Error.html")).Build();
 
-            Renderer = ModScriban.Template<WebsiteModel>(Data.FromResource("Template.html")).Build();
+            Renderer = ModScriban.Template<WebsiteModel>(Resource.FromAssembly("Template.html")).Build();
         }
 
         #endregion
@@ -104,12 +104,12 @@ namespace GenHTTP.Themes.Arcana
 
         private static Script GetScript(string name)
         {
-            return new Script(name, false, Data.FromResource($"scripts.{name}").Build());
+            return new Script(name, false, Resource.FromAssembly($"scripts.{name}").Build());
         }
 
         private static Style GetStyle(string name)
         {
-            return new Style(name, Data.FromResource($"styles.{name}").Build());
+            return new Style(name, Resource.FromAssembly($"styles.{name}").Build());
         }
 
         public object? GetModel(IRequest request, IHandler handler)

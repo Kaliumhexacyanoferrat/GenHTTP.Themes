@@ -1,4 +1,4 @@
-﻿using GenHTTP.Api.Content;
+﻿using GenHTTP.Api.Content.IO;
 using GenHTTP.Api.Content.Websites;
 using GenHTTP.Api.Infrastructure;
 
@@ -9,7 +9,7 @@ namespace GenHTTP.Themes.Lorahost
     {
         private string? _Copyright, _Title, _Subtitle, _Action, _ActionTitle;
 
-        private IResourceProvider? _Header;
+        private IResource? _Header;
 
         #region Functionality
 
@@ -38,9 +38,9 @@ namespace GenHTTP.Themes.Lorahost
             return this;
         }
 
-        public LorahostBuilder Header(IBuilder<IResourceProvider> headerProvider) => Header(headerProvider.Build());
+        public LorahostBuilder Header(IBuilder<IResource> headerProvider) => Header(headerProvider.Build());
 
-        public LorahostBuilder Header(IResourceProvider headerProvider)
+        public LorahostBuilder Header(IResource headerProvider)
         {
             _Header = headerProvider;
             return this;

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 
 using GenHTTP.Api.Content;
+using GenHTTP.Api.Content.IO;
 using GenHTTP.Api.Content.Templating;
 using GenHTTP.Api.Content.Websites;
 using GenHTTP.Api.Protocol;
@@ -82,7 +83,7 @@ namespace GenHTTP.Themes.Lorahost
 
         #region Initialization
 
-        public LorahostTheme(IResourceProvider? header, string? copyright, string? title, string? subtitle, string? action, string? actionTitle)
+        public LorahostTheme(IResource? header, string? copyright, string? title, string? subtitle, string? action, string? actionTitle)
         {
             _Copyright = copyright;
             _Title = title;
@@ -91,7 +92,7 @@ namespace GenHTTP.Themes.Lorahost
             _ActionTitle = actionTitle;
 
             var resources = Layout.Create()
-                                  .Fallback(Static.Resources("Lorahost.resources"));
+                                  .Fallback(Modules.IO.Resources.From(ResourceTree.FromAssembly("Lorahost.resources")));
 
             if (header != null)
             {
@@ -100,9 +101,9 @@ namespace GenHTTP.Themes.Lorahost
 
             Resources = resources;
 
-            ErrorHandler = ModScriban.Template<ErrorModel>(Data.FromResource("Error.html")).Build();
+            ErrorHandler = ModScriban.Template<ErrorModel>(Resource.FromAssembly("Error.html")).Build();
 
-            Renderer = ModScriban.Template<WebsiteModel>(Data.FromResource("Template.html")).Build();
+            Renderer = ModScriban.Template<WebsiteModel>(Resource.FromAssembly("Template.html")).Build();
         }
 
         #endregion
@@ -116,12 +117,12 @@ namespace GenHTTP.Themes.Lorahost
 
         private static Script GetScript(string name)
         {
-            return new Script(name, false, Data.FromResource($"scripts.{name}").Build());
+            return new Script(name, false, Resource.FromAssembly($"scripts.{name}").Build());
         }
 
         private static Style GetStyle(string name)
         {
-            return new Style(name, Data.FromResource($"styles.{name}").Build());
+            return new Style(name, Resource.FromAssembly($"styles.{name}").Build());
         }
 
         #endregion

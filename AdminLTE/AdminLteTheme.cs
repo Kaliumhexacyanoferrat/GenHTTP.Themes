@@ -116,7 +116,7 @@ namespace GenHTTP.Themes.AdminLTE
             _Title = title;
 
             var resources = Layout.Create()
-                                  .Fallback(Static.Resources("AdminLTE.resources"));
+                                  .Fallback(Modules.IO.Resources.From(ResourceTree.FromAssembly("AdminLTE.resources")));
 
             HasLogo = (logo != null);
 
@@ -138,9 +138,9 @@ namespace GenHTTP.Themes.AdminLTE
 
             Resources = resources;
 
-            ErrorHandler = ModScriban.Template<ErrorModel>(Data.FromResource("Error.html")).Build();
+            ErrorHandler = ModScriban.Template<ErrorModel>(Resource.FromAssembly("Error.html")).Build();
 
-            Renderer = ModScriban.Template<WebsiteModel>(Data.FromResource("Template.html")).Build();
+            Renderer = ModScriban.Template<WebsiteModel>(Resource.FromAssembly("Template.html")).Build();
         }
 
         #endregion
@@ -165,12 +165,12 @@ namespace GenHTTP.Themes.AdminLTE
 
         private static Script GetScript(string name)
         {
-            return new Script(name, false, Data.FromResource($"scripts.{name}").Build());
+            return new Script(name, false, Resource.FromAssembly($"scripts.{name}").Build());
         }
 
         private static Style GetStyle(string name)
         {
-            return new Style(name, Data.FromResource($"styles.{name}").Build());
+            return new Style(name, Resource.FromAssembly($"styles.{name}").Build());
         }
 
         #endregion
