@@ -4,7 +4,7 @@ The themes found in this repository can be used to style your web applications r
 
 ## Using Themes
 
-All of the themes in this repository are available via nuget. After installing the theme you would like to use, configure and pass a theme instance to the `Website` builder.
+All of the themes in this repository are available via nuget. After installing the theme you would like to use, configure and pass a theme instance to the [Website](https://genhttp.org/documentation/content/websites) builder.
 
 ```
 var theme = Theme.Create()
@@ -27,7 +27,7 @@ The following themes are available in this repository.
 
 ## Building from Source
 
-To build this project, install the [.NET Core SDK](https://dotnet.microsoft.com/download) and run the following commands in the checked out repository root:
+To build this project, install the [.NET 5 SDK](https://dotnet.microsoft.com/download) and run the following commands in the checked out repository root:
 
 ```
 cd Demo
