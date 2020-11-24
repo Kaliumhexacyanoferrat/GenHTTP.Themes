@@ -1,4 +1,4 @@
-# GenHTTP.Themes
+# GenHTTP Themes
 
 The themes found in this repository can be used to style your web applications running on the [GenHTTP webserver](https://genhttp.org).
 
