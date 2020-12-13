@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 using GenHTTP.Api.Content;
 using GenHTTP.Api.Content.Templating;
@@ -112,12 +113,12 @@ namespace GenHTTP.Themes.Arcana
             return new Style(name, Resource.FromAssembly($"styles.{name}").Build());
         }
 
-        public object? GetModel(IRequest request, IHandler handler)
+        public ValueTask<object?> GetModelAsync(IRequest request, IHandler handler)
         {
             var footer1 = _FooterMenu1?.GetMenu(request, handler);
             var footer2 = _FooterMenu2?.GetMenu(request, handler);
 
-            return new ThemeModel(_Title, _Copyright, _Footer1Title, footer1, _Footer2Title, footer2);
+            return new ValueTask<object?>(new ThemeModel(_Title, _Copyright, _Footer1Title, footer1, _Footer2Title, footer2));
         }
 
         #endregion

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 using GenHTTP.Api.Content;
 using GenHTTP.Api.Content.Templating;
@@ -17,11 +18,11 @@ namespace GenHTTP.Themes.AdminLTE
     {
         private readonly string? _Title;
 
-        private readonly Func<IRequest, IHandler, UserProfile?>? _UserProfile;
+        private readonly Func<IRequest, IHandler, ValueTask<UserProfile?>>? _UserProfile;
 
-        private readonly Func<IRequest, IHandler, string?>? _FooterLeft, _FooterRight, _Sidebar, _Notifications;
+        private readonly Func<IRequest, IHandler, ValueTask<string?>>? _FooterLeft, _FooterRight, _Sidebar, _Notifications;
 
-        private readonly Func<IRequest, IHandler, SearchBox?>? _SearchBox;
+        private readonly Func<IRequest, IHandler, ValueTask<SearchBox?>>? _SearchBox;
 
         private readonly IMenuProvider? _HeaderMenu;
 
@@ -108,10 +109,10 @@ namespace GenHTTP.Themes.AdminLTE
 
         #region Initialization
 
-        public AdminLteTheme(string? title, IHandlerBuilder? logo, Func<IRequest, IHandler, UserProfile?>? userProfile,
-            Func<IRequest, IHandler, string?>? footerLeft, Func<IRequest, IHandler, string?>? footerRight,
-            Func<IRequest, IHandler, string?>? sidebar, Func<IRequest, IHandler, SearchBox?>? searchBox,
-            Func<IRequest, IHandler, string?>? notifications, IMenuProvider? headerMenu)
+        public AdminLteTheme(string? title, IHandlerBuilder? logo, Func<IRequest, IHandler, ValueTask<UserProfile?>>? userProfile,
+            Func<IRequest, IHandler, ValueTask<string?>>? footerLeft, Func<IRequest, IHandler, ValueTask<string?>>? footerRight,
+            Func<IRequest, IHandler, ValueTask<string?>>? sidebar, Func<IRequest, IHandler, ValueTask<SearchBox?>>? searchBox,
+            Func<IRequest, IHandler, ValueTask<string?>>? notifications, IMenuProvider? headerMenu)
         {
             _Title = title;
 
@@ -147,18 +148,18 @@ namespace GenHTTP.Themes.AdminLTE
 
         #region Functionality
 
-        public object? GetModel(IRequest request, IHandler handler)
+        public async ValueTask<object?> GetModelAsync(IRequest request, IHandler handler)
         {
-            var userProfile = (_UserProfile != null) ? _UserProfile(request, handler) : null;
+            var userProfile = (_UserProfile != null) ? await _UserProfile(request, handler) : null;
 
-            var footerLeft = (_FooterLeft != null) ? _FooterLeft(request, handler) : null;
-            var footerRight = (_FooterRight != null) ? _FooterRight(request, handler) : null;
+            var footerLeft = (_FooterLeft != null) ? await _FooterLeft(request, handler) : null;
+            var footerRight = (_FooterRight != null) ? await _FooterRight(request, handler) : null;
 
-            var sidebar = (_Sidebar != null) ? _Sidebar(request, handler) : null;
-            var searchBox = (_SearchBox != null) ? _SearchBox(request, handler) : null;
+            var sidebar = (_Sidebar != null) ? await _Sidebar(request, handler) : null;
+            var searchBox = (_SearchBox != null) ? await _SearchBox(request, handler) : null;
 
             var headerMenu = _HeaderMenu?.GetMenu(request, handler);
-            var notifications = (_Notifications != null) ? _Notifications(request, handler) : null;
+            var notifications = (_Notifications != null) ? await _Notifications(request, handler) : null;
 
             return new ThemeModel(_Title, HasLogo, userProfile, footerLeft, footerRight, sidebar, searchBox, headerMenu, notifications);
         }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 using GenHTTP.Api.Content;
 using GenHTTP.Api.Content.IO;
@@ -110,9 +111,9 @@ namespace GenHTTP.Themes.Lorahost
 
         #region Functionality
 
-        public object? GetModel(IRequest request, IHandler handler)
+        public ValueTask<object?> GetModelAsync(IRequest request, IHandler handler)
         {
-            return new ThemeModel(_Copyright, _Title, _Subtitle, _Action, _ActionTitle);
+            return new ValueTask<object?>(new ThemeModel(_Copyright, _Title, _Subtitle, _Action, _ActionTitle));
         }
 
         private static Script GetScript(string name)

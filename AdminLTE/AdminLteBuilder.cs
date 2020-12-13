@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Threading.Tasks;
 using GenHTTP.Api.Content;
 using GenHTTP.Api.Content.Websites;
 using GenHTTP.Api.Infrastructure;
@@ -14,11 +14,11 @@ namespace GenHTTP.Themes.AdminLTE
 
         private IHandlerBuilder? _Logo;
 
-        private Func<IRequest, IHandler, UserProfile?>? _UserProfile;
+        private Func<IRequest, IHandler, ValueTask<UserProfile?>>? _UserProfile;
 
-        private Func<IRequest, IHandler, string?>? _FooterLeft, _FooterRight, _Sidebar, _Notifications;
+        private Func<IRequest, IHandler, ValueTask<string?>>? _FooterLeft, _FooterRight, _Sidebar, _Notifications;
 
-        private Func<IRequest, IHandler, SearchBox?>? _SearchBox;
+        private Func<IRequest, IHandler, ValueTask<SearchBox?>>? _SearchBox;
 
         private IBuilder<IMenuProvider>? _HeaderMenu;
 
@@ -48,9 +48,29 @@ namespace GenHTTP.Themes.AdminLTE
         /// Sets the handler which will be invoked to get the
         /// user profile to be rendered on the left side.
         /// </summary>
-        public AdminLteBuilder UserProfile(Func<IRequest, IHandler, UserProfile?> provider)
+        public AdminLteBuilder UserProfile(Func<IRequest, IHandler, ValueTask<UserProfile?>> provider)
         {
             _UserProfile = provider;
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the handler which will be invoked to get the
+        /// user profile to be rendered on the left side.
+        /// </summary>
+        public AdminLteBuilder UserProfile(Func<IRequest, IHandler, UserProfile?> provider)
+        {
+            _UserProfile = (r, h) => new ValueTask<UserProfile?>(provider(r, h));
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the handler which will be invoked to get the
+        /// footer HTML to be rendered on the left side.
+        /// </summary>
+        public AdminLteBuilder FooterLeft(Func<IRequest, IHandler, ValueTask<string?>> provider)
+        {
+            _FooterLeft = provider;
             return this;
         }
 
@@ -60,7 +80,17 @@ namespace GenHTTP.Themes.AdminLTE
         /// </summary>
         public AdminLteBuilder FooterLeft(Func<IRequest, IHandler, string?> provider)
         {
-            _FooterLeft = provider;
+            _FooterLeft = (r, h) => new ValueTask<string?>(provider(r, h));
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the handler which will be invoked to get the
+        /// footer HTML to be rendered on the right side.
+        /// </summary>
+        public AdminLteBuilder FooterRight(Func<IRequest, IHandler, ValueTask<string?>> provider)
+        {
+            _FooterRight = provider;
             return this;
         }
 
@@ -70,7 +100,17 @@ namespace GenHTTP.Themes.AdminLTE
         /// </summary>
         public AdminLteBuilder FooterRight(Func<IRequest, IHandler, string?> provider)
         {
-            _FooterRight = provider;
+            _FooterRight = (r, h) => new ValueTask<string?>(provider(r, h));
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the handler which will be invoked to get the
+        /// sidebar to be rendered on the right side.
+        /// </summary>
+        public AdminLteBuilder Sidebar(Func<IRequest, IHandler, ValueTask<string?>> provider)
+        {
+            _Sidebar = provider;
             return this;
         }
 
@@ -80,7 +120,17 @@ namespace GenHTTP.Themes.AdminLTE
         /// </summary>
         public AdminLteBuilder Sidebar(Func<IRequest, IHandler, string?> provider)
         {
-            _Sidebar = provider;
+            _Sidebar = (r, h) => new ValueTask<string?>(provider(r, h));
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the handler which will be invoked to get the
+        /// search box to be rendered on the left side.
+        /// </summary>
+        public AdminLteBuilder Search(Func<IRequest, IHandler, ValueTask<SearchBox?>> provider)
+        {
+            _SearchBox = provider;
             return this;
         }
 
@@ -90,7 +140,7 @@ namespace GenHTTP.Themes.AdminLTE
         /// </summary>
         public AdminLteBuilder Search(Func<IRequest, IHandler, SearchBox?> provider)
         {
-            _SearchBox = provider;
+            _SearchBox = (r, h) => new ValueTask<SearchBox?>(provider(r, h));
             return this;
         }
 
@@ -107,9 +157,19 @@ namespace GenHTTP.Themes.AdminLTE
         /// Sets the handler to be invoked to render the notifications
         /// area in the upper right corner of your app.
         /// </summary>
-        public AdminLteBuilder Notifications(Func<IRequest, IHandler, string?> notifications)
+        public AdminLteBuilder Notifications(Func<IRequest, IHandler, ValueTask<string?>> notifications)
         {
             _Notifications = notifications;
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the handler to be invoked to render the notifications
+        /// area in the upper right corner of your app.
+        /// </summary>
+        public AdminLteBuilder Notifications(Func<IRequest, IHandler, string?> notifications)
+        {
+            _Notifications = (r, h) => new ValueTask<string?>(notifications(r, h));
             return this;
         }
 
