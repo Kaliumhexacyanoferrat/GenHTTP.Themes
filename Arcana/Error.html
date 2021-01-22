@@ -14,7 +14,7 @@
 
                 {{ if cause && request.server.development }}
                     <p>
-                        <pre>{{ cause }}</pre>
+                        <pre>{{ cause | html.escape }}</pre>
                     </p>
                 {{ end }}
 

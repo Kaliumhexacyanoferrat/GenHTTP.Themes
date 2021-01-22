@@ -16,7 +16,6 @@ using GenHTTP.Modules.Placeholders;
 using GenHTTP.Themes.AdminLTE;
 using GenHTTP.Themes.Arcana;
 using GenHTTP.Themes.Lorahost;
-using System.Threading.Tasks;
 
 namespace GenHTTP.Themes.Demo
 {
@@ -44,10 +43,13 @@ namespace GenHTTP.Themes.Demo
             var additional = Page.From("Content", "This is additional content")
                                  .Description("Additional Content");
 
+            var error = ModScriban.Page(Resource.FromString("This is a {{ rendering.error }}!"))
+                                  .Description("Error page");
+
             var content = Layout.Create()
                                 .Add("one", additional)
                                 .Add("two", additional)
-                                .Add("three", additional)
+                                .Add("error", error)
                                 .Index(additional);
 
             var root = Layout.Create()
@@ -61,7 +63,7 @@ namespace GenHTTP.Themes.Demo
 
             var menu = Menu.Empty()
                            .Add("{website}", "Home")
-                           .Add("content/", "Content", new List<(string, string)> { ("one/", "One"), ("two/", "Two"), ("three/", "Three") })
+                           .Add("content/", "Content", new List<(string, string)> { ("one/", "One"), ("two/", "Two"), ("error/", "Error") })
                            .Add("other", "Other");
                         
             foreach (var entry in GetThemes())
@@ -100,7 +102,7 @@ namespace GenHTTP.Themes.Demo
                                         .Sidebar((r, h) => "<h5>Sidebar Content</h5><p>This content is placed on the sidebar. Awesome.</p>")
                                         .Search((r, h) => new SearchBox(""))
                                         .Header(menu)
-                                        .Notifications((r, h) => notifications.RenderAsync(new ViewModel(r, h)).Result)
+                                        .Notifications(async (r, h) => await notifications.RenderAsync(new ViewModel(r, h)))
                                         .Build();
         }
 
