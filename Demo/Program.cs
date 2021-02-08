@@ -112,8 +112,7 @@ namespace GenHTTP.Themes.Demo
 
             return new ArcanaBuilder().Title("Arcana Theme")
                                       .Copyright("Copyright 2020")
-                                      .Footer1("Footer 1", menu)
-                                      .Footer2("Footer 2", menu)
+                                      .Footer((_, __) => "<h3>Custom Footer</h3>")
                                       .Build();
         }
 

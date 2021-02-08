@@ -1,14 +1,18 @@
-﻿using GenHTTP.Api.Content.Websites;
-using GenHTTP.Api.Infrastructure;
+﻿using System;
+using System.Threading.Tasks;
+
+using GenHTTP.Api.Content;
+using GenHTTP.Api.Content.Websites;
+using GenHTTP.Api.Protocol;
 
 namespace GenHTTP.Themes.Arcana
 {
 
     public class ArcanaBuilder : IThemeBuilder<ArcanaBuilder>
     {
-        private string? _Title, _Copyright, _Footer1Title, _Footer2Title;
+        private string? _Title, _Copyright;
 
-        private IBuilder<IMenuProvider>? _Footer1, _Footer2;
+        private Func<IRequest, IHandler, ValueTask<string?>>? _Footer;
 
         #region Functionality
 
@@ -24,23 +28,21 @@ namespace GenHTTP.Themes.Arcana
             return this;
         }
 
-        public ArcanaBuilder Footer1(string title, IBuilder<IMenuProvider> menu)
+        public ArcanaBuilder Footer(Func<IRequest, IHandler, ValueTask<string?>> provider)
         {
-            _Footer1 = menu;
-            _Footer1Title = title;
+            _Footer = provider;
             return this;
         }
 
-        public ArcanaBuilder Footer2(string title, IBuilder<IMenuProvider> menu)
+        public ArcanaBuilder Footer(Func<IRequest, IHandler, string?> provider)
         {
-            _Footer2 = menu;
-            _Footer2Title = title;
+            _Footer = (r, h) => new ValueTask<string?>(provider(r, h));
             return this;
         }
 
         public ITheme Build()
         {
-            return new ArcanaTheme(_Title, _Copyright, _Footer1Title, _Footer1?.Build(), _Footer2Title, _Footer2?.Build());
+            return new ArcanaTheme(_Title, _Copyright, _Footer);
         }
 
         #endregion

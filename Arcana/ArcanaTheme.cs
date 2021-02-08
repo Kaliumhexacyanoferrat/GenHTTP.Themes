@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 using GenHTTP.Api.Content;
@@ -14,9 +15,9 @@ namespace GenHTTP.Themes.Arcana
 
     public class ArcanaTheme : ITheme
     {
-        private readonly string? _Title, _Copyright, _Footer1Title, _Footer2Title;
+        private readonly string? _Title, _Copyright;
 
-        private readonly IMenuProvider? _FooterMenu1, _FooterMenu2;
+        private readonly Func<IRequest, IHandler, ValueTask<string?>>? _Footer;
 
         #region Supporting data structures
 
@@ -27,24 +28,14 @@ namespace GenHTTP.Themes.Arcana
 
             public string? Copyright { get; }
 
-            public string? Title1 { get; }
+            public string? Footer { get; }
 
-            public List<ContentElement>? Footer1 { get; }
-
-            public string? Title2 { get; }
-
-            public List<ContentElement>? Footer2 { get; }
-
-            public ThemeModel(string? title, string? copyright, string? footer1Title, List<ContentElement>? footer1, string? footer2Title, List<ContentElement>? footer2)
+            public ThemeModel(string? title, string? copyright, string? footer)
             {
                 Title = title;
                 Copyright = copyright;
 
-                Footer1 = footer1;
-                Title1 = footer1Title;
-
-                Footer2 = footer2;
-                Title2 = footer2Title;
+                Footer = footer;
             }
 
         }
@@ -81,16 +72,12 @@ namespace GenHTTP.Themes.Arcana
 
         #region Initialization
 
-        public ArcanaTheme(string? title, string? copyright, string? footer1Title, IMenuProvider? footerMenu1, string? footer2Title, IMenuProvider? footerMenu2)
+        public ArcanaTheme(string? title, string? copyright, Func<IRequest, IHandler, ValueTask<string?>>? footer)
         {
             _Title = title;
             _Copyright = copyright;
 
-            _FooterMenu1 = footerMenu1;
-            _Footer1Title = footer1Title;
-
-            _FooterMenu2 = footerMenu2;
-            _Footer2Title = footer2Title;
+            _Footer = footer;
 
             Resources = Modules.IO.Resources.From(ResourceTree.FromAssembly("Arcana.resources"));
 
@@ -113,12 +100,11 @@ namespace GenHTTP.Themes.Arcana
             return new Style(name, Resource.FromAssembly($"styles.{name}").Build());
         }
 
-        public ValueTask<object?> GetModelAsync(IRequest request, IHandler handler)
+        public async ValueTask<object?> GetModelAsync(IRequest request, IHandler handler)
         {
-            var footer1 = _FooterMenu1?.GetMenu(request, handler);
-            var footer2 = _FooterMenu2?.GetMenu(request, handler);
+            var footer = (_Footer != null) ? await _Footer(request, handler) : null;
 
-            return new ValueTask<object?>(new ThemeModel(_Title, _Copyright, _Footer1Title, footer1, _Footer2Title, footer2));
+            return new ThemeModel(_Title, _Copyright, footer);
         }
 
         #endregion
