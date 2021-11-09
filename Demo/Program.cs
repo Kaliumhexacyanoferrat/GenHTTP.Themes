@@ -91,7 +91,7 @@ namespace GenHTTP.Themes.Demo
             var menu = Menu.Empty()
                            .Add("{website}/", "Home");
 
-            var notifications = ModScriban.Template<IBaseModel>(Resource.FromAssembly("Notifications.html"))
+            var notifications = ModScriban.Template<BasicModel>(Resource.FromAssembly("Notifications.html"))
                                           .Build();
 
             return new AdminLteBuilder().Title("AdminLTE Theme")
@@ -102,7 +102,7 @@ namespace GenHTTP.Themes.Demo
                                         .Sidebar((r, h) => "<h5>Sidebar Content</h5><p>This content is placed on the sidebar. Awesome.</p>")
                                         .Search((r, h) => new SearchBox(""))
                                         .Header(menu)
-                                        .Notifications(async (r, h) => await notifications.RenderAsync(new ViewModel(r, h)))
+                                        .Notifications(async (r, h) => await notifications.RenderAsync(new BasicModel(r, h)))
                                         .Build();
         }
 

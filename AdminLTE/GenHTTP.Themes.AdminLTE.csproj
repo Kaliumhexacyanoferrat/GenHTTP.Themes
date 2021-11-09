@@ -2,15 +2,15 @@
 
   <PropertyGroup>
     
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
 
-    <LangVersion>9.0</LangVersion>
+    <LangVersion>10.0</LangVersion>
     <Nullable>enable</Nullable>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 
-    <AssemblyVersion>5.1.1.0</AssemblyVersion>
-    <FileVersion>5.1.1.0</FileVersion>
-    <Version>5.1.1</Version>
+    <AssemblyVersion>6.0.0.0</AssemblyVersion>
+    <FileVersion>6.0.0.0</FileVersion>
+    <Version>6.0.0</Version>
 
     <Authors>Andreas Nägeli</Authors>
     <Company />
@@ -88,13 +88,13 @@
 
   <ItemGroup>
 
-    <PackageReference Include="GenHTTP.Api" Version="5.1.0" />
+    <PackageReference Include="GenHTTP.Api" Version="6.0.0" />
     
-    <PackageReference Include="GenHTTP.Modules.IO" Version="5.1.0" />
-    <PackageReference Include="GenHTTP.Modules.Layouting" Version="5.1.0" />
-    <PackageReference Include="GenHTTP.Modules.Scriban" Version="5.1.0" />
+    <PackageReference Include="GenHTTP.Modules.IO" Version="6.0.0" />
+    <PackageReference Include="GenHTTP.Modules.Layouting" Version="6.0.0" />
+    <PackageReference Include="GenHTTP.Modules.Scriban" Version="6.0.0" />
     
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0">
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
