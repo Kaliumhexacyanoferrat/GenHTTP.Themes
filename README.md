@@ -27,7 +27,7 @@ The following themes are available in this repository.
 
 ## Building from Source
 
-To build this project, install the [.NET 5 SDK](https://dotnet.microsoft.com/download) and run the following commands in the checked out repository root:
+To build this project, install the [.NET 6 SDK](https://dotnet.microsoft.com/download) and run the following commands in the checked out repository root:
 
 ```
 cd Demo
