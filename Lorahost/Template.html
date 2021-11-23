@@ -14,6 +14,12 @@
     <meta name="description" content="{{ content.meta.description }}" />
     {{ end }}
 
+    <link rel="preload" href="{{ route '{website}/resources/fonts/themify.woff?-fvbane' }}" as="font" type="font/woff" crossorigin>
+
+    <link rel="preload" href="{{ route '{website}/resources/fonts/fa-solid-900.woff2' }}" as="font" type="font/woff2" crossorigin>
+
+    <link rel="preload" href="{{ route '{website}/resources/header.jpg' }}" as="image">
+
     {{~ for style in styles ~}}
     <link rel="stylesheet" href="{{ route style.path }}" />
     {{~ end ~}}

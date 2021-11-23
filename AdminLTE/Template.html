@@ -14,6 +14,14 @@
     <meta name="description" content="{{ content.meta.description }}" />
     {{ end }}
 
+    <link rel="preload" href="{{ route '{website}/resources/fonts/fa-solid-900.woff2' }}" as="font" type="font/woff2" crossorigin>
+
+    <link rel="preload" href="{{ route '{website}/resources/fonts/fa-regular-400.woff2' }}" as="font" type="font/woff2" crossorigin>
+
+    <link rel="preload" href="https://fonts.gstatic.com/s/sourcesanspro/v18/6xK3dSBYKcSV-LCoeQqfX1RYOo3qOK7l.woff2" as="font" type="font/woff" crossorigin>
+
+    <link rel="preload" href="https://fonts.gstatic.com/s/sourcesanspro/v18/6xKydSBYKcSV-LCoeQqfX1RYOo3ik4zwlxdu.woff2" as="font" type="font/woff" crossorigin>
+
     {{~ for style in styles ~}}
     <link rel="stylesheet" href="{{ route style.path }}" />
     {{~ end ~}}
