@@ -100,11 +100,11 @@
 
   <ItemGroup>
     
-    <PackageReference Include="GenHTTP.Api" Version="6.0.0" />
+    <PackageReference Include="GenHTTP.Api" Version="6.0.1" />
     <PackageReference Include="GenHTTP.Modules.IO" Version="6.0.0" />
     <PackageReference Include="GenHTTP.Modules.Scriban" Version="6.0.0" />
     
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.0">
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
