@@ -1,0 +1,27 @@
+﻿<section class="wrapper style1">
+
+    <div class="container">
+
+        <div id="content">
+            
+            <article>
+
+                <header>
+                    <h2>{{ status }}</h2>
+                </header>
+
+                <p>{{ message }}</p>
+
+                {{ if cause && request.server.development }}
+                    <p>
+                        <pre>{{ cause | html.escape }}</pre>
+                    </p>
+                {{ end }}
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>

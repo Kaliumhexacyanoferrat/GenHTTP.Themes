@@ -1,0 +1,112 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    
+    <TargetFramework>net6.0</TargetFramework>
+
+    <LangVersion>10.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+
+    <AssemblyVersion>6.2.0.0</AssemblyVersion>
+    <FileVersion>6.2.0.0</FileVersion>
+    <Version>6.2.0</Version>
+
+    <Authors>Andreas Nägeli</Authors>
+    <Company />
+
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageProjectUrl>https://genhttp.org/</PackageProjectUrl>
+
+    <PackageTags>GenHTTP Website Theme</PackageTags>
+    <Description>Dimension theme to be used with the website module of the GenHTTP webserver</Description>
+
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+
+    <PackageIcon>icon.png</PackageIcon>
+    
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Error.html" />
+    <None Remove="resources\fonts\fa-brands-400.eot" />
+    <None Remove="resources\fonts\fa-brands-400.svg" />
+    <None Remove="resources\fonts\fa-brands-400.ttf" />
+    <None Remove="resources\fonts\fa-brands-400.woff" />
+    <None Remove="resources\fonts\fa-brands-400.woff2" />
+    <None Remove="resources\fonts\fa-regular-400.eot" />
+    <None Remove="resources\fonts\fa-regular-400.svg" />
+    <None Remove="resources\fonts\fa-regular-400.ttf" />
+    <None Remove="resources\fonts\fa-regular-400.woff" />
+    <None Remove="resources\fonts\fa-regular-400.woff2" />
+    <None Remove="resources\fonts\fa-solid-900.eot" />
+    <None Remove="resources\fonts\fa-solid-900.svg" />
+    <None Remove="resources\fonts\fa-solid-900.ttf" />
+    <None Remove="resources\fonts\fa-solid-900.woff" />
+    <None Remove="resources\fonts\fa-solid-900.woff2" />
+    <None Remove="resources\images\bg.jpg" />
+    <None Remove="resources\images\overlay.png" />
+    <None Remove="scripts\breakpoints.min.js" />
+    <None Remove="scripts\browser.min.js" />
+    <None Remove="scripts\jquery.min.js" />
+    <None Remove="scripts\main.js" />
+    <None Remove="scripts\util.js" />
+    <None Remove="styles\fontawesome-all.min.css" />
+    <None Remove="styles\main.css" />
+    <None Remove="styles\noscript.css" />
+    <None Remove="Template.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Error.html" />
+    <EmbeddedResource Include="resources\fonts\fa-brands-400.eot" />
+    <EmbeddedResource Include="resources\fonts\fa-brands-400.svg" />
+    <EmbeddedResource Include="resources\fonts\fa-brands-400.ttf" />
+    <EmbeddedResource Include="resources\fonts\fa-brands-400.woff" />
+    <EmbeddedResource Include="resources\fonts\fa-brands-400.woff2" />
+    <EmbeddedResource Include="resources\fonts\fa-regular-400.eot" />
+    <EmbeddedResource Include="resources\fonts\fa-regular-400.svg" />
+    <EmbeddedResource Include="resources\fonts\fa-regular-400.ttf" />
+    <EmbeddedResource Include="resources\fonts\fa-regular-400.woff" />
+    <EmbeddedResource Include="resources\fonts\fa-regular-400.woff2" />
+    <EmbeddedResource Include="resources\fonts\fa-solid-900.eot" />
+    <EmbeddedResource Include="resources\fonts\fa-solid-900.svg" />
+    <EmbeddedResource Include="resources\fonts\fa-solid-900.ttf" />
+    <EmbeddedResource Include="resources\fonts\fa-solid-900.woff" />
+    <EmbeddedResource Include="resources\fonts\fa-solid-900.woff2" />
+    <EmbeddedResource Include="resources\images\overlay.png" />
+    <EmbeddedResource Include="scripts\breakpoints.min.js" />
+    <EmbeddedResource Include="scripts\browser.min.js" />
+    <EmbeddedResource Include="scripts\jquery.min.js" />
+    <EmbeddedResource Include="scripts\main.js" />
+    <EmbeddedResource Include="scripts\util.js" />
+    <EmbeddedResource Include="styles\fontawesome-all.min.css" />
+    <EmbeddedResource Include="styles\main.css" />
+    <EmbeddedResource Include="styles\noscript.css" />
+    <EmbeddedResource Include="Template.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    
+    <None Include="..\LICENSE" Pack="true" PackagePath="\" />
+    <None Include="..\Resources\icon.png" Pack="true" PackagePath="\" />
+
+  </ItemGroup>
+
+  <ItemGroup>
+    
+    <PackageReference Include="GenHTTP.Api" Version="6.2.0" />
+    <PackageReference Include="GenHTTP.Modules.IO" Version="6.2.0" />
+    <PackageReference Include="GenHTTP.Modules.Razor" Version="6.2.0" />
+	<PackageReference Include="GenHTTP.Modules.Layouting" Version="6.2.0" />
+    
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    
+  </ItemGroup>
+
+</Project>

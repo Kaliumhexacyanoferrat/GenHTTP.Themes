@@ -16,6 +16,7 @@ using GenHTTP.Modules.Placeholders;
 using GenHTTP.Themes.AdminLTE;
 using GenHTTP.Themes.Arcana;
 using GenHTTP.Themes.Lorahost;
+using GenHTTP.Themes.Dimension;
 
 namespace GenHTTP.Themes.Demo
 {
@@ -83,6 +84,7 @@ namespace GenHTTP.Themes.Demo
         {
             yield return ("admin-lte", GetAdminLTE());
             yield return ("arcana", GetArcana());
+            yield return ("dimension", GetDimension());
             yield return ("lorahost", GetLorahost());
         }
 
@@ -114,6 +116,16 @@ namespace GenHTTP.Themes.Demo
                                       .Copyright("Copyright 2020")
                                       .Footer((_, __) => "<h3>Custom Footer</h3>")
                                       .Build();
+        }
+
+        private static ITheme GetDimension()
+        {
+            var menu = Menu.From("{website}");
+
+            return new DimensionBuilder().Title("Dimension Theme")
+                                         .Copyright("Copyright 2020")
+                                         .Background(Resource.FromAssembly("header.jpg"))
+                                         .Build();
         }
 
         private static ITheme GetLorahost()
