@@ -16,6 +16,7 @@ using GenHTTP.Modules.Placeholders;
 using GenHTTP.Themes.AdminLTE;
 using GenHTTP.Themes.Arcana;
 using GenHTTP.Themes.Lorahost;
+using GenHTTP.Themes.Dimension;
 
 namespace GenHTTP.Themes.Demo
 {
@@ -83,6 +84,7 @@ namespace GenHTTP.Themes.Demo
         {
             yield return ("admin-lte", GetAdminLTE());
             yield return ("arcana", GetArcana());
+            yield return ("dimension", GetDimension());
             yield return ("lorahost", GetLorahost());
         }
 
@@ -111,16 +113,30 @@ namespace GenHTTP.Themes.Demo
             var menu = Menu.From("{website}");
 
             return new ArcanaBuilder().Title("Arcana Theme")
-                                      .Copyright("Copyright 2020")
+                                      .Copyright("Copyright 2021")
                                       .Footer((_, __) => "<h3>Custom Footer</h3>")
                                       .Build();
+        }
+
+        private static ITheme GetDimension()
+        {
+            var menu = Menu.From("{website}");
+
+            return new DimensionBuilder().Title("Dimension Theme")
+                                         .Copyright("Copyright 2021")
+                                         .Icon("gem")
+                                         .Background(Resource.FromAssembly("header.jpg"))
+                                         .Section("section-1", "Section 1", "This is additional content")
+                                         .Section("section-2", "Section 2", "This is additional content")
+                                         .Section("section-3", "Section 3", "This is additional content")
+                                         .Build();
         }
 
         private static ITheme GetLorahost()
         {
             return new LorahostBuilder().Title("Lorahost Theme")
                                         .Subtitle("Yet another theme")
-                                        .Copyright("Copyright 2020")
+                                        .Copyright("Copyright 2021")
                                         .Action("content", "Link to content!")
                                         .Header(Resource.FromAssembly("header.jpg"))
                                         .Build();

@@ -1,0 +1,94 @@
+﻿<!DOCTYPE HTML>
+
+<html>
+<head>
+    
+    <title>{{ content.meta.title }} - {{ model.title }}</title>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+    {{ if content.meta.description }}
+    <meta name="description" content="{{ content.meta.description }}" />
+    {{ end }}
+    <link rel="preload" href="{{ route '{website}/resources/fonts/fa-solid-900.woff2' }}" as="font" type="font/woff2" crossorigin>
+
+    <link rel="preload" href="{{ route '{website}/resources/fonts/fa-brands-400.woff2' }}" as="font" type="font/woff2" crossorigin>
+
+    <link rel="preload" href="{{ route '{website}/resources/fonts/fa-regular-400.woff2' }}" as="font" type="font/woff2" crossorigin>
+
+    <link rel="preload" href="{{ route '{website}/resources/background.jpg' }}" as="image">
+
+    <link rel="preload" href="{{ route '{website}/resources/images/overlay.png' }}" as="image">
+
+    {{~ for style in styles ~}}
+    <link rel="stylesheet" href="{{ route style.path }}" />
+    {{~ end ~}}
+
+</head>
+<body class="is-preload">
+
+    <!-- Wrapper -->
+    <div id="wrapper">
+
+        <!-- Header -->
+        <header id="header">
+            <div class="logo">
+                <span class="icon fa-{{ model.icon }}"></span>
+            </div>
+            <div class="content">
+                <div class="inner">
+                    <h1>{{ content.meta.title }}</h1>
+                    <p>
+                        {{ content.content }}
+                    </p>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    {{~ for section in model.sections ~}}
+                    <li><a href="#{{ section.id }}">{{ section.title }}</a></li>
+                    {{~ end ~}}
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Main -->
+        <div id="main">
+
+            {{~ for section in model.sections ~}}
+            <article id="{{ section.id }}">
+                <h2 class="major">{{ section.title }}</h2>
+                {{ section.content }}
+            </article>
+            {{~ end ~}}
+
+        </div>
+
+        <!-- Footer -->
+        <footer id="footer">
+
+            <p class="copyright">
+
+                {{ if model.copyright }}
+                {{ model.copyright }} |
+                {{ end }}
+
+                Design: <a href="https://html5up.net">HTML5 UP</a>.
+
+            </p>
+
+        </footer>
+
+    </div>
+
+    <!-- BG -->
+    <div id="bg"></div>
+
+    <!-- Scripts -->
+    {{~ for script in scripts ~}}
+    <script src="{{ route script.path }}"></script>
+    {{~ end ~}}
+
+</body>
+</html>
