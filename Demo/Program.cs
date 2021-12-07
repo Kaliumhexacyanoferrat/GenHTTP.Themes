@@ -113,7 +113,7 @@ namespace GenHTTP.Themes.Demo
             var menu = Menu.From("{website}");
 
             return new ArcanaBuilder().Title("Arcana Theme")
-                                      .Copyright("Copyright 2020")
+                                      .Copyright("Copyright 2021")
                                       .Footer((_, __) => "<h3>Custom Footer</h3>")
                                       .Build();
         }
@@ -123,8 +123,12 @@ namespace GenHTTP.Themes.Demo
             var menu = Menu.From("{website}");
 
             return new DimensionBuilder().Title("Dimension Theme")
-                                         .Copyright("Copyright 2020")
+                                         .Copyright("Copyright 2021")
+                                         .Icon("gem")
                                          .Background(Resource.FromAssembly("header.jpg"))
+                                         .Section("section-1", "Section 1", "This is additional content")
+                                         .Section("section-2", "Section 2", "This is additional content")
+                                         .Section("section-3", "Section 3", "This is additional content")
                                          .Build();
         }
 
@@ -132,7 +136,7 @@ namespace GenHTTP.Themes.Demo
         {
             return new LorahostBuilder().Title("Lorahost Theme")
                                         .Subtitle("Yet another theme")
-                                        .Copyright("Copyright 2020")
+                                        .Copyright("Copyright 2021")
                                         .Action("content", "Link to content!")
                                         .Header(Resource.FromAssembly("header.jpg"))
                                         .Build();

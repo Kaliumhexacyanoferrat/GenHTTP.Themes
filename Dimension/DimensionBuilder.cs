@@ -1,4 +1,6 @@
-﻿using GenHTTP.Api.Content.IO;
+﻿using System.Collections.Generic;
+
+using GenHTTP.Api.Content.IO;
 using GenHTTP.Api.Content.Websites;
 using GenHTTP.Api.Infrastructure;
 
@@ -9,7 +11,11 @@ namespace GenHTTP.Themes.Dimension
     {
         private string? _Title, _Copyright;
 
+        private string _Icon = "gem";
+
         private IResource? _Background;
+
+        private readonly List<SinglePageSection> _Sections = new();
 
         #region Functionality
 
@@ -33,9 +39,21 @@ namespace GenHTTP.Themes.Dimension
             return this;
         }
 
+        public DimensionBuilder Section(string id, string title, string content)
+        {
+            _Sections.Add(new(id, title, content));
+            return this;
+        }
+
+        public DimensionBuilder Icon(string icon)
+        {
+            _Icon = icon;
+            return this;
+        }
+
         public ITheme Build()
         {
-            return new DimensionTheme(_Title, _Copyright, _Background);
+            return new DimensionTheme(_Title, _Copyright, _Icon, _Sections, _Background);
         }
 
         #endregion

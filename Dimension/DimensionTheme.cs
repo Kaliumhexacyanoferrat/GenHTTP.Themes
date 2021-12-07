@@ -8,7 +8,7 @@ using GenHTTP.Api.Content.Websites;
 using GenHTTP.Api.Protocol;
 
 using GenHTTP.Modules.IO;
-using GenHTTP.Modules.Razor;
+using GenHTTP.Modules.Scriban;
 using GenHTTP.Modules.Layouting;
 
 namespace GenHTTP.Themes.Dimension
@@ -17,6 +17,10 @@ namespace GenHTTP.Themes.Dimension
     public class DimensionTheme : ITheme
     {
         private readonly string? _Title, _Copyright;
+
+        private readonly string _Icon;
+
+        private readonly List<SinglePageSection> _Sections;
 
         #region Supporting data structures
 
@@ -27,10 +31,16 @@ namespace GenHTTP.Themes.Dimension
 
             public string? Copyright { get; }
 
-            public ThemeModel(string? title, string? copyright)
+            public string Icon { get; }
+
+            public List<SinglePageSection> Sections { get; }
+
+            public ThemeModel(string? title, string? copyright, string icon, List<SinglePageSection> sections)
             {
                 Title = title;
                 Copyright = copyright;
+                Icon = icon;
+                Sections = sections;
             }
 
         }
@@ -67,10 +77,14 @@ namespace GenHTTP.Themes.Dimension
 
         #region Initialization
 
-        public DimensionTheme(string? title, string? copyright, IResource? background)
+        public DimensionTheme(string? title, string? copyright, string icon, List<SinglePageSection> sections, IResource? background)
         {
             _Title = title;
             _Copyright = copyright;
+
+            _Icon = icon;
+
+            _Sections = sections;
 
             var resources = Layout.Create()
                                   .Fallback(Modules.IO.Resources.From(ResourceTree.FromAssembly("Dimension.resources")));
@@ -82,9 +96,9 @@ namespace GenHTTP.Themes.Dimension
 
             Resources = resources;
 
-            ErrorHandler = ModRazor.Template<ErrorModel>(Resource.FromAssembly("Error.html")).Build();
+            ErrorHandler = ModScriban.Template<ErrorModel>(Resource.FromAssembly("Error.html")).Build();
 
-            Renderer = ModRazor.Template<WebsiteModel>(Resource.FromAssembly("Template.html")).Build();
+            Renderer = ModScriban.Template<WebsiteModel>(Resource.FromAssembly("Template.html")).Build();
         }
 
         #endregion
@@ -103,7 +117,7 @@ namespace GenHTTP.Themes.Dimension
 
         public ValueTask<object?> GetModelAsync(IRequest request, IHandler handler)
         {
-            return new(new ThemeModel(_Title, _Copyright));
+            return new(new ThemeModel(_Title, _Copyright, _Icon, _Sections));
         }
 
         #endregion
