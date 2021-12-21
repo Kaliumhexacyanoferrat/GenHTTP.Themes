@@ -8,9 +8,9 @@
     <Nullable>enable</Nullable>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 
-    <AssemblyVersion>6.3.0.0</AssemblyVersion>
-    <FileVersion>6.3.0.0</FileVersion>
-    <Version>6.3.0</Version>
+    <AssemblyVersion>6.3.1.0</AssemblyVersion>
+    <FileVersion>6.3.1.0</FileVersion>
+    <Version>6.3.1</Version>
 
     <Authors>Andreas Nägeli</Authors>
     <Company />
@@ -27,6 +27,9 @@
 
     <PackageIcon>icon.png</PackageIcon>
     
+	<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	<NoWarn>CS1591</NoWarn>  
+	  
   </PropertyGroup>
 
   <ItemGroup>
@@ -97,10 +100,10 @@
 
   <ItemGroup>
     
-    <PackageReference Include="GenHTTP.Api" Version="6.3.0" />
-    <PackageReference Include="GenHTTP.Modules.IO" Version="6.3.0" />
-    <PackageReference Include="GenHTTP.Modules.Scriban" Version="6.3.0" />
-	<PackageReference Include="GenHTTP.Modules.Layouting" Version="6.3.0" />
+    <PackageReference Include="GenHTTP.Api" Version="6.3.1" />
+    <PackageReference Include="GenHTTP.Modules.IO" Version="6.3.1" />
+    <PackageReference Include="GenHTTP.Modules.Scriban" Version="6.3.1" />
+	<PackageReference Include="GenHTTP.Modules.Layouting" Version="6.3.1" />
     
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1">
       <PrivateAssets>all</PrivateAssets>
