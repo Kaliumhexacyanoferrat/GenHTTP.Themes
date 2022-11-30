@@ -1,0 +1,77 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    
+    <TargetFramework>net6.0</TargetFramework>
+
+    <LangVersion>10.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+
+    <AssemblyVersion>6.4.0.0</AssemblyVersion>
+    <FileVersion>6.4.0.0</FileVersion>
+    <Version>6.4.0</Version>
+
+    <Authors>Andreas Nägeli</Authors>
+    <Company />
+
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageProjectUrl>https://genhttp.org/</PackageProjectUrl>
+
+    <PackageTags>GenHTTP Website Theme</PackageTags>
+    <Description>Theme without any visual elements for the GenHTTP webserver (basically a blank page)</Description>
+
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+
+    <PackageIcon>icon.png</PackageIcon>
+    
+	<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	<NoWarn>CS1591</NoWarn>  
+	  
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="resources\**" />
+    <Compile Remove="scripts\**" />
+    <Compile Remove="styles\**" />
+    <EmbeddedResource Remove="resources\**" />
+    <EmbeddedResource Remove="scripts\**" />
+    <EmbeddedResource Remove="styles\**" />
+    <None Remove="resources\**" />
+    <None Remove="scripts\**" />
+    <None Remove="styles\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Error.html" />
+    <None Remove="Template.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Error.html" />
+    <EmbeddedResource Include="Template.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    
+    <None Include="..\LICENSE" Pack="true" PackagePath="\" />
+    <None Include="..\Resources\icon.png" Pack="true" PackagePath="\" />
+
+  </ItemGroup>
+
+  <ItemGroup>
+    
+    <PackageReference Include="GenHTTP.Api" Version="6.4.0" />
+    <PackageReference Include="GenHTTP.Modules.IO" Version="6.4.0" />
+    <PackageReference Include="GenHTTP.Modules.Scriban" Version="6.4.0" />
+    
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    
+  </ItemGroup>
+
+</Project>

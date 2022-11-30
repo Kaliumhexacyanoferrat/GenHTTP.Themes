@@ -17,6 +17,7 @@ using GenHTTP.Themes.AdminLTE;
 using GenHTTP.Themes.Arcana;
 using GenHTTP.Themes.Lorahost;
 using GenHTTP.Themes.Dimension;
+using GenHTTP.Themes.NoTheme;
 
 namespace GenHTTP.Themes.Demo
 {
@@ -86,6 +87,7 @@ namespace GenHTTP.Themes.Demo
             yield return ("arcana", GetArcana());
             yield return ("dimension", GetDimension());
             yield return ("lorahost", GetLorahost());
+            yield return ("no-theme", GetNoTheme());
         }
 
         private static ITheme GetAdminLTE()
@@ -140,6 +142,11 @@ namespace GenHTTP.Themes.Demo
                                         .Action("content", "Link to content!")
                                         .Header(Resource.FromAssembly("header.jpg"))
                                         .Build();
+        }
+
+        private static ITheme GetNoTheme()
+        {
+            return new NoThemeBuilder().Build();
         }
 
     }

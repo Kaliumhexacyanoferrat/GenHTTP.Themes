@@ -1,0 +1,11 @@
+﻿<header>
+    <h1>{{ status }}</h1>
+</header>
+
+<p>{{ message }}</p>
+
+{{ if cause && request.server.development }}
+    <p>
+        <pre>{{ cause | html.escape }}</pre>
+    </p>
+{{ end }}
