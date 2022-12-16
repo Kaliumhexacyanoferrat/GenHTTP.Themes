@@ -99,12 +99,14 @@ namespace GenHTTP.Themes.Demo
                                           .Build();
 
             return new AdminLteBuilder().Title("AdminLTE Theme")
+                                        .Fullscreen()
                                         .Logo(Download.From(Resource.FromAssembly("logo.png")))
                                         .UserProfile((r, h) => new UserProfile("Some User", "/avatar.png", ""))
                                         .FooterLeft((r, h) => "Footer text on the left ...")
                                         .FooterRight((r, h) => "... and on the right (template by <a href=\"https://adminlte.io\" target=\"blank\">AdminLTE.io</a>)")
                                         .Sidebar((r, h) => "<h5>Sidebar Content</h5><p>This content is placed on the sidebar. Awesome.</p>")
                                         .Search((r, h) => new SearchBox(""))
+                                        .MenuSearch((r, h) => new MenuSearchBox("Search ..."))
                                         .Header(menu)
                                         .Notifications(async (r, h) => await notifications.RenderAsync(new BasicModel(r, h)))
                                         .Build();

@@ -8,9 +8,9 @@
     <Nullable>enable</Nullable>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 
-	<AssemblyVersion>6.4.0.0</AssemblyVersion>
-	<FileVersion>6.4.0.0</FileVersion>
-	<Version>6.4.0</Version>
+	<AssemblyVersion>6.4.1.0</AssemblyVersion>
+	<FileVersion>6.4.1.0</FileVersion>
+	<Version>6.4.1</Version>
 
     <Authors>Andreas Nägeli</Authors>
     <Company />
@@ -53,7 +53,7 @@
     <None Remove="scripts\bootstrap.bundle.min.js" />
     <None Remove="scripts\jquery.min.js" />
     <None Remove="styles\adminlte.min.css" />
-    <None Remove="styles\fa-all.min.css" />
+    <None Remove="styles\fontawesome.min.css" />
     <None Remove="Template.html" />
   </ItemGroup>
 
@@ -78,7 +78,7 @@
     <EmbeddedResource Include="scripts\bootstrap.bundle.min.js" />
     <EmbeddedResource Include="scripts\jquery.min.js" />
     <EmbeddedResource Include="styles\adminlte.min.css" />
-    <EmbeddedResource Include="styles\fa-all.min.css" />
+    <EmbeddedResource Include="styles\fontawesome.min.css" />
     <EmbeddedResource Include="Template.html" />
   </ItemGroup>
 

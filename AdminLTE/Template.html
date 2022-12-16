@@ -6,7 +6,6 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
 
     <title>{{ content.meta.title }}</title>
 
@@ -14,19 +13,11 @@
     <meta name="description" content="{{ content.meta.description }}" />
     {{ end }}
 
-    <link rel="preload" href="{{ route '{website}/resources/fonts/fa-solid-900.woff2' }}" as="font" type="font/woff2" crossorigin>
-
-    <link rel="preload" href="{{ route '{website}/resources/fonts/fa-regular-400.woff2' }}" as="font" type="font/woff2" crossorigin>
-
-    <link rel="preload" href="https://fonts.gstatic.com/s/sourcesanspro/v18/6xK3dSBYKcSV-LCoeQqfX1RYOo3qOK7l.woff2" as="font" type="font/woff" crossorigin>
-
-    <link rel="preload" href="https://fonts.gstatic.com/s/sourcesanspro/v18/6xKydSBYKcSV-LCoeQqfX1RYOo3ik4zwlxdu.woff2" as="font" type="font/woff" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 
     {{~ for style in styles ~}}
     <link rel="stylesheet" href="{{ route style.path }}" />
     {{~ end ~}}
-
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
 </head>
 
@@ -44,164 +35,190 @@
 
                 {{~ for item in model.header_menu ~}}
 
-                    <li class="nav-item d-none d-sm-inline-block">
-                        <a href="{{ route item.path }}" class="nav-link">{{ item.details.title }}</a>
-                    </li>
-
-                {{ end }}
-
-            </ul>
-
-            {{ if model.search_box }}
-
-            <form class="form-inline ml-3" action="{{ route model.search_box.action }}" method="{{ model.search_box.method }}">
-                <div class="input-group input-group-sm">
-                    <input class="form-control form-control-navbar" type="search" placeholder="{{ model.search_box.placeholder }}" aria-label="Search" name="query">
-                    <div class="input-group-append">
-                        <button class="btn btn-navbar" type="submit">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-            </form>
-            
-            {{ end }}
-
-            <ul class="navbar-nav ml-auto">
-                
-                {{ model.notifications }}
-                
-                {{ if model.sidebar }}
-
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-                        <i class="fas fa-th-large"></i>
-                    </a>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="{{ route item.path }}" class="nav-link">{{ item.details.title }}</a>
                 </li>
 
                 {{ end }}
 
             </ul>
 
+            <ul class="navbar-nav ml-auto">
+
+                {{ if model.search_box }}
+
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="navbar-search" href="#" role="button">
+                        <i class="fas fa-search"></i>
+                    </a>
+                    <div class="navbar-search-block">
+                        <form class="form-inline" action="{{ route model.search_box.action }}" method="{{ model.search_box.method }}">
+                            <div class="input-group input-group-sm">
+                                <input class="form-control form-control-navbar" type="search" placeholder="{{ model.search_box.placeholder }}" name="query" aria-label="Search">
+                                <div class="input-group-append">
+                                    <button class="btn btn-navbar" type="submit">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                    <button class="btn btn-navbar" type="button" data-widget="navbar-search">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </li>
+
+                {{ end }}
+
+                {{ model.notifications }}
+
+                {{ if model.enable_fullscreen }}
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+                        <i class="fas fa-expand-arrows-alt"></i>
+                    </a>
+                </li>
+                {{ end }}
+
+                {{ if model.sidebar }}
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+                        <i class="fas fa-th-large"></i>
+                    </a>
+                </li>
+                {{ end }}
+
+            </ul>
+
         </nav>
 
-        <aside class="main-sidebar elevation-4 sidebar-dark-lightblue">
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
 
             {{ if model.has_logo || model.title }}
-            
+
             <a href="{{ route '{website}/' }}" class="brand-link">
                 {{ if model.has_logo }}
-                <img src="{{ route 'resources/logo.png' }}" alt="Logo {{ model.title }}" class="brand-image img-circle elevation-3"
-                     style="opacity: .8">
+                <img src="{{ route 'resources/logo.png' }}" alt="Logo {{ model.title }}" class="brand-image img-circle elevation-3" style="opacity: .8">
                 {{ end }}
                 <span class="brand-text font-weight-light">{{ model.title }}</span>
             </a>
-            
+
             {{ end }}
 
-            <!-- Sidebar -->
-            <div class="sidebar">
+        <div class="sidebar">
 
-                {{ if model.user_profile }}
+            {{ if model.user_profile }}
 
-                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                    <div class="image">
-                        <img src="{{ route model.user_profile.avatar }}" class="img-circle elevation-2" alt="{{ model.user_profile.username }}">
-                    </div>
-                    <div class="info">
-                        <a href="{{ route model.user_profile.action }}" class="d-block">{{ model.user_profile.username }}</a>
+            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <div class="image">
+                    <img src="{{ route model.user_profile.avatar }}" class="img-circle elevation-2" alt="{{ model.user_profile.username }}">
+                </div>
+                <div class="info">
+                    <a href="{{ route model.user_profile.action }}" class="d-block">{{ model.user_profile.username }}</a>
+                </div>
+            </div>
+
+            {{ end }}
+
+            {{ if model.menu_search_box }}
+
+            <div class="form-inline">
+                <div class="input-group" data-widget="sidebar-search">
+                    <input class="form-control form-control-sidebar" type="search" placeholder="{{ model.menu_search_box.placeholder }}" aria-label="Search">
+                    <div class="input-group-append">
+                        <button class="btn btn-sidebar">
+                            <i class="fas fa-search fa-fw"></i>
+                        </button>
                     </div>
                 </div>
+            </div>
 
-                {{ end }}
+            {{ end }}
 
-                <nav class="mt-2">
+            <nav class="mt-2">
 
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
-                        {{~ for item in menu ~}}
+                    {{~ for item in menu ~}}
 
-                        {{ active = ( request.target.path | string.contains item.path ) || ( ( route item.path ) == "./" && ( request.target.path | string.ends_with "/" ) ) }}
+                    {{ active = ( request.target.path | string.contains item.path ) || ( ( route item.path ) == "./" && ( request.target.path | string.ends_with "/" ) ) }}
 
-                        {{ if item.children }}
+                    {{ if item.children }}
 
-                           <li class="nav-item has-treeview menu-open">
+                    <li class="nav-item{{ if active }} menu-open{{ end }}">
 
-                               <a href="{{ route item.path }}" class="nav-link{{ if active }} active{{ end }}">
-                                   <i class="nav-icon far fa-circle"></i>
-                                   <p>
-                                       {{ item.details.title }}
-                                       <i class="right fas fa-angle-left"></i>
-                                   </p>
-                               </a>
+                        <a href="{{ route item.path }}" class="nav-link{{ if active }} active{{ end }}">
+                            <i class="nav-icon far fa-circle"></i>
+                            <p>
+                                {{ item.details.title }}
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
 
-                               {{ if item.children && active }}
-                               
-                               <ul class="nav nav-treeview">
-                               
-                                   {{ for child in item.children }}
+                        {{ if item.children && active }}
 
-                                   {{ childActive = ( request.target.path | string.contains child.path ) || ( ( route child.path ) == "./" && ( request.target.path | string.ends_with "/" ) ) }}
+                        <ul class="nav nav-treeview">
 
-                                   <li class="nav-item">
-                                       <a href="{{ route child.path }}" class="nav-link{{ if childActive }} active{{ end }}">
-                                           <i class="far fa-circle nav-icon"></i>
-                                           <p>{{ child.details.title }}</p>
-                                       </a>
-                                   </li>
+                            {{ for child in item.children }}
 
-                                   {{ end }}
-
-                               </ul>
-
-                               {{ end }}
-
-                            </li>
-
-                            {{ else }}
+                            {{ childActive = ( request.target.path | string.contains child.path ) || ( ( route child.path ) == "./" && ( request.target.path | string.ends_with "/" ) ) }}
 
                             <li class="nav-item">
-                                <a href="{{ route item.path }}" class="nav-link{{ if active }} active{{ end }}">
-                                    <i class="nav-icon far fa-circle"></i>
-                                    <p>
-                                        {{ item.details.title }}
-                                    </p>
+                                <a href="{{ route child.path }}" class="nav-link{{ if childActive }} active{{ end }}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>{{ child.details.title }}</p>
                                 </a>
                             </li>
 
                             {{ end }}
 
+                        </ul>
+
                         {{ end }}
 
-                    </ul>
-                
-                </nav>
+                    </li>
 
-            </div>
+                    {{ else }}
+
+                    <li class="nav-item">
+                        <a href="{{ route item.path }}" class="nav-link{{ if active }} active{{ end }}">
+                            <i class="nav-icon far fa-circle"></i>
+                            <p>
+                                {{ item.details.title }}
+                            </p>
+                        </a>
+                    </li>
+
+                    {{ end }}
+
+                    {{ end }}
+
+                </ul>
+
+            </nav>
+
+        </div>
 
         </aside>
 
         <div class="content-wrapper">
-
-            <div class="content-header">
+            <section class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0 text-dark">{{ content.meta.title }}</h1>
+                            <h1>{{ content.meta.title }}</h1>
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
 
-            <div class="content">
-
+            <section class="content">
+                
                 <div class="container-fluid">
-
                     {{ content.content }}
-
                 </div>
 
-            </div>
+            </section>
 
         </div>
 
@@ -212,31 +229,30 @@
                 {{ model.sidebar }}
             </div>
         </aside>
-        
+
         {{ end }}
 
-        {{ if model.footer_left || model.footer_right }}
 
         <footer class="main-footer">
 
             {{ if model.footer_right }}
-            <div class="float-right d-none d-sm-inline">
+            <div class="float-right d-none d-sm-block">
                 {{ model.footer_right }}
             </div>
             {{ end }}
 
-            {{ if model.footer_left }}
-                {{ model.footer_left }}
-            {{ end }}
-        </footer>
 
-        {{ end }}
+            {{ if model.footer_left }}
+            {{ model.footer_left }}
+            {{ end }}
+
+        </footer>
 
     </div>
 
-    {{~ for script in scripts ~}}
-    <script src="{{ route script.path }}"></script>
-    {{~ end ~}}
+        {{~ for script in scripts ~}}
+        <script src="{{ route script.path }}"></script>
+        {{~ end ~}}
 
 </body>
 
