@@ -18,11 +18,15 @@ namespace GenHTTP.Themes.AdminLTE
     {
         private readonly string? _Title;
 
+        private readonly bool _EnableFullscreen;
+
         private readonly Func<IRequest, IHandler, ValueTask<UserProfile?>>? _UserProfile;
 
         private readonly Func<IRequest, IHandler, ValueTask<string?>>? _FooterLeft, _FooterRight, _Sidebar, _Notifications;
 
         private readonly Func<IRequest, IHandler, ValueTask<SearchBox?>>? _SearchBox;
+
+        private readonly Func<IRequest, IHandler, ValueTask<MenuSearchBox?>>? _MenuSearchBox;
 
         private readonly IMenuProvider? _HeaderMenu;
 
@@ -35,6 +39,8 @@ namespace GenHTTP.Themes.AdminLTE
 
             public bool HasLogo { get; }
 
+            public bool EnableFullscreen { get; }
+
             public UserProfile? UserProfile { get; }
 
             public string? FooterLeft { get; }
@@ -45,18 +51,21 @@ namespace GenHTTP.Themes.AdminLTE
 
             public SearchBox? SearchBox { get; }
 
+            public MenuSearchBox? MenuSearchBox { get; }
+
             public List<ContentElement>? HeaderMenu { get; }
 
             public string? Notifications { get; }
 
-            public ThemeModel(string? title, bool hasLogo, UserProfile? userProfile, 
+            public ThemeModel(string? title, bool hasLogo, bool enableFullscreen, UserProfile? userProfile, 
                               string? footerLeft, string? footerRight, string? sidebar,
-                              SearchBox? searchBox, List<ContentElement>? headerMenu,
-                              string? notifications)
+                              SearchBox? searchBox, MenuSearchBox? menuSearchBox,
+                              List<ContentElement>? headerMenu, string? notifications)
             {
                 Title = title;
 
                 HasLogo = hasLogo;
+                EnableFullscreen = enableFullscreen;
                 UserProfile = userProfile;
 
                 FooterLeft = footerLeft;
@@ -64,6 +73,7 @@ namespace GenHTTP.Themes.AdminLTE
 
                 Sidebar = sidebar;
                 SearchBox = searchBox;
+                MenuSearchBox = menuSearchBox;
 
                 HeaderMenu = headerMenu;
                 Notifications = notifications;
@@ -92,7 +102,7 @@ namespace GenHTTP.Themes.AdminLTE
             {
                 return new List<Style>
                 {
-                    GetStyle("fa-all.min.css") , GetStyle("adminlte.min.css")
+                    GetStyle("fontawesome.min.css") , GetStyle("adminlte.min.css")
                 };
             }
         }
@@ -109,12 +119,14 @@ namespace GenHTTP.Themes.AdminLTE
 
         #region Initialization
 
-        public AdminLteTheme(string? title, IHandlerBuilder? logo, Func<IRequest, IHandler, ValueTask<UserProfile?>>? userProfile,
+        public AdminLteTheme(string? title, IHandlerBuilder? logo, bool enableFullscreen, Func<IRequest, IHandler, ValueTask<UserProfile?>>? userProfile,
             Func<IRequest, IHandler, ValueTask<string?>>? footerLeft, Func<IRequest, IHandler, ValueTask<string?>>? footerRight,
             Func<IRequest, IHandler, ValueTask<string?>>? sidebar, Func<IRequest, IHandler, ValueTask<SearchBox?>>? searchBox,
-            Func<IRequest, IHandler, ValueTask<string?>>? notifications, IMenuProvider? headerMenu)
+            Func<IRequest, IHandler, ValueTask<MenuSearchBox?>>? menuSearchBox, Func<IRequest, IHandler, ValueTask<string?>>? notifications, 
+            IMenuProvider? headerMenu)
         {
             _Title = title;
+            _EnableFullscreen= enableFullscreen;
 
             var resources = Layout.Create()
                                   .Fallback(Modules.IO.Resources.From(ResourceTree.FromAssembly("AdminLTE.resources")));
@@ -133,6 +145,7 @@ namespace GenHTTP.Themes.AdminLTE
 
             _Sidebar = sidebar;
             _SearchBox = searchBox;
+            _MenuSearchBox = menuSearchBox;
 
             _HeaderMenu = headerMenu;
             _Notifications = notifications;
@@ -157,11 +170,12 @@ namespace GenHTTP.Themes.AdminLTE
 
             var sidebar = (_Sidebar != null) ? await _Sidebar(request, handler) : null;
             var searchBox = (_SearchBox != null) ? await _SearchBox(request, handler) : null;
+            var menuSearchBox = (_MenuSearchBox != null) ? await _MenuSearchBox(request, handler) : null;
 
             var headerMenu = _HeaderMenu?.GetMenu(request, handler);
             var notifications = (_Notifications != null) ? await _Notifications(request, handler) : null;
 
-            return new ThemeModel(_Title, HasLogo, userProfile, footerLeft, footerRight, sidebar, searchBox, headerMenu, notifications);
+            return new ThemeModel(_Title, HasLogo, _EnableFullscreen, userProfile, footerLeft, footerRight, sidebar, searchBox, menuSearchBox, headerMenu, notifications);
         }
 
         private static Script GetScript(string name)

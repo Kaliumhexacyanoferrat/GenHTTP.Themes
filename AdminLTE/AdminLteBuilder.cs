@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+
 using GenHTTP.Api.Content;
 using GenHTTP.Api.Content.Websites;
 using GenHTTP.Api.Infrastructure;
@@ -12,6 +13,8 @@ namespace GenHTTP.Themes.AdminLTE
     {
         private string? _Title;
 
+        private bool _EnableFullscreen = false;
+
         private IHandlerBuilder? _Logo;
 
         private Func<IRequest, IHandler, ValueTask<UserProfile?>>? _UserProfile;
@@ -19,6 +22,8 @@ namespace GenHTTP.Themes.AdminLTE
         private Func<IRequest, IHandler, ValueTask<string?>>? _FooterLeft, _FooterRight, _Sidebar, _Notifications;
 
         private Func<IRequest, IHandler, ValueTask<SearchBox?>>? _SearchBox;
+
+        private Func<IRequest, IHandler, ValueTask<MenuSearchBox?>>? _MenuSearchBox;
 
         private IBuilder<IMenuProvider>? _HeaderMenu;
 
@@ -126,7 +131,7 @@ namespace GenHTTP.Themes.AdminLTE
 
         /// <summary>
         /// Sets the handler which will be invoked to get the
-        /// search box to be rendered on the left side.
+        /// search box to be rendered on the top.
         /// </summary>
         public AdminLteBuilder Search(Func<IRequest, IHandler, ValueTask<SearchBox?>> provider)
         {
@@ -136,11 +141,31 @@ namespace GenHTTP.Themes.AdminLTE
 
         /// <summary>
         /// Sets the handler which will be invoked to get the
-        /// search box to be rendered on the left side.
+        /// search box to be rendered on the top.
         /// </summary>
         public AdminLteBuilder Search(Func<IRequest, IHandler, SearchBox?> provider)
         {
             _SearchBox = (r, h) => new ValueTask<SearchBox?>(provider(r, h));
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the handler which will be invoked to get the
+        /// search box to be rendered on the left side.
+        /// </summary>
+        public AdminLteBuilder MenuSearch(Func<IRequest, IHandler, ValueTask<MenuSearchBox?>> provider)
+        {
+            _MenuSearchBox = provider;
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the handler which will be invoked to get the
+        /// search box to be rendered on the left side.
+        /// </summary>
+        public AdminLteBuilder MenuSearch(Func<IRequest, IHandler, MenuSearchBox?> provider)
+        {
+            _MenuSearchBox = (r, h) => new ValueTask<MenuSearchBox?>(provider(r, h));
             return this;
         }
 
@@ -173,10 +198,19 @@ namespace GenHTTP.Themes.AdminLTE
             return this;
         }
 
+        /// <summary>
+        /// Enables the fullscreen button in the top navigation bar.
+        /// </summary>
+        public AdminLteBuilder Fullscreen()
+        {
+            _EnableFullscreen = true;
+            return this;
+        }
+
         public ITheme Build()
         {
-            return new AdminLteTheme(_Title, _Logo, _UserProfile, _FooterLeft, _FooterRight,
-                _Sidebar, _SearchBox, _Notifications, _HeaderMenu?.Build());
+            return new AdminLteTheme(_Title, _Logo, _EnableFullscreen, _UserProfile, _FooterLeft, _FooterRight,
+                _Sidebar, _SearchBox, _MenuSearchBox, _Notifications, _HeaderMenu?.Build());
         }
 
         #endregion
