@@ -7,7 +7,7 @@ using GenHTTP.Api.Infrastructure;
 namespace GenHTTP.Themes.Dimension
 {
 
-    public class DimensionBuilder : IThemeBuilder<DimensionBuilder>
+    public class DimensionBuilder : IThemeBuilder<DimensionTheme>
     {
         private string? _Title, _Copyright;
 
@@ -51,7 +51,7 @@ namespace GenHTTP.Themes.Dimension
             return this;
         }
 
-        public ITheme Build()
+        public DimensionTheme Build()
         {
             return new DimensionTheme(_Title, _Copyright, _Icon, _Sections, _Background);
         }

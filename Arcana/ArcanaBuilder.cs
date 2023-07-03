@@ -8,7 +8,7 @@ using GenHTTP.Api.Protocol;
 namespace GenHTTP.Themes.Arcana
 {
 
-    public class ArcanaBuilder : IThemeBuilder<ArcanaBuilder>
+    public class ArcanaBuilder : IThemeBuilder<ArcanaTheme>
     {
         private string? _Title, _Copyright;
 
@@ -40,7 +40,7 @@ namespace GenHTTP.Themes.Arcana
             return this;
         }
 
-        public ITheme Build()
+        public ArcanaTheme Build()
         {
             return new ArcanaTheme(_Title, _Copyright, _Footer);
         }

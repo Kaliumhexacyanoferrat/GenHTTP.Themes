@@ -129,7 +129,7 @@ namespace GenHTTP.Themes.AdminLTE
             _EnableFullscreen= enableFullscreen;
 
             var resources = Layout.Create()
-                                  .Fallback(Modules.IO.Resources.From(ResourceTree.FromAssembly("AdminLTE.resources")));
+                                  .Add(Modules.IO.Resources.From(ResourceTree.FromAssembly("AdminLTE.resources")));
 
             HasLogo = (logo != null);
 
@@ -172,7 +172,7 @@ namespace GenHTTP.Themes.AdminLTE
             var searchBox = (_SearchBox != null) ? await _SearchBox(request, handler) : null;
             var menuSearchBox = (_MenuSearchBox != null) ? await _MenuSearchBox(request, handler) : null;
 
-            var headerMenu = _HeaderMenu?.GetMenu(request, handler);
+            var headerMenu = (_HeaderMenu != null) ? await _HeaderMenu.GetMenuAsync(request, handler) : null;
             var notifications = (_Notifications != null) ? await _Notifications(request, handler) : null;
 
             return new ThemeModel(_Title, HasLogo, _EnableFullscreen, userProfile, footerLeft, footerRight, sidebar, searchBox, menuSearchBox, headerMenu, notifications);

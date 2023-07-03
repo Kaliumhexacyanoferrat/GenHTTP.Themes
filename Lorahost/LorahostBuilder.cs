@@ -46,7 +46,7 @@ namespace GenHTTP.Themes.Lorahost
             return this;
         }
 
-        public ITheme Build()
+        public LorahostTheme Build()
         {
             return new LorahostTheme(_Header, _Copyright, _Title, _Subtitle, _Action, _ActionTitle);
         }

@@ -207,7 +207,7 @@ namespace GenHTTP.Themes.AdminLTE
             return this;
         }
 
-        public ITheme Build()
+        public AdminLteTheme Build()
         {
             return new AdminLteTheme(_Title, _Logo, _EnableFullscreen, _UserProfile, _FooterLeft, _FooterRight,
                 _Sidebar, _SearchBox, _MenuSearchBox, _Notifications, _HeaderMenu?.Build());

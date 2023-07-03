@@ -93,7 +93,7 @@ namespace GenHTTP.Themes.Lorahost
             _ActionTitle = actionTitle;
 
             var resources = Layout.Create()
-                                  .Fallback(Modules.IO.Resources.From(ResourceTree.FromAssembly("Lorahost.resources")));
+                                  .Add(Modules.IO.Resources.From(ResourceTree.FromAssembly("Lorahost.resources")));
 
             if (header != null)
             {

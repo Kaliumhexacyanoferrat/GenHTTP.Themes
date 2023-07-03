@@ -33,9 +33,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="GenHTTP.Core" Version="6.4.0" />
-    <PackageReference Include="GenHTTP.Modules.Websites" Version="6.4.0" />
-    <PackageReference Include="GenHTTP.Modules.Scriban" Version="6.4.0" />
+    <PackageReference Include="GenHTTP.Core" Version="7.0.0" />
+    <PackageReference Include="GenHTTP.Modules.Websites" Version="7.0.0" />
+    <PackageReference Include="GenHTTP.Modules.Scriban" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>

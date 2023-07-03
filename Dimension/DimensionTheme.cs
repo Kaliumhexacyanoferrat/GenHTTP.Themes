@@ -87,7 +87,7 @@ namespace GenHTTP.Themes.Dimension
             _Sections = sections;
 
             var resources = Layout.Create()
-                                  .Fallback(Modules.IO.Resources.From(ResourceTree.FromAssembly("Dimension.resources")));
+                                  .Add(Modules.IO.Resources.From(ResourceTree.FromAssembly("Dimension.resources")));
 
             if (background != null)
             {

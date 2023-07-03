@@ -3,12 +3,12 @@
 namespace GenHTTP.Themes.NoTheme
 {
 
-    public class NoThemeBuilder : IThemeBuilder<NoThemeBuilder>
+    public class NoThemeBuilder : IThemeBuilder<NoThemeInstance>
     {
 
         #region Functionality
 
-        public ITheme Build()
+        public NoThemeInstance Build()
         {
             return new NoThemeInstance();
         }
