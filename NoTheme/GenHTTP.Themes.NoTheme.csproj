@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     
-    <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
+    <TargetFrameworks>net6.0;net7.0;net8.0</TargetFrameworks>
 
     <LangVersion>10.0</LangVersion>
     <Nullable>enable</Nullable>
@@ -63,11 +63,11 @@
 
   <ItemGroup>
     
-    <PackageReference Include="GenHTTP.Api" Version="7.0.0" />
-    <PackageReference Include="GenHTTP.Modules.IO" Version="7.0.0" />
-    <PackageReference Include="GenHTTP.Modules.Scriban" Version="7.0.0" />
+    <PackageReference Include="GenHTTP.Api" Version="8.0.0" />
+    <PackageReference Include="GenHTTP.Modules.IO" Version="8.0.0" />
+    <PackageReference Include="GenHTTP.Modules.Scriban" Version="8.0.0" />
     
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1">
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
