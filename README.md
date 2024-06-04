@@ -2,6 +2,9 @@
 
 The themes found in this repository can be used to style your web applications running on the [GenHTTP webserver](https://genhttp.org).
 
+> [!IMPORTANT]  
+> GenHTTP will remove all server side rendering functionalities in version 9. See [this issue](https://github.com/Kaliumhexacyanoferrat/GenHTTP/issues/496) for more details.
+
 ## Using Themes
 
 All of the themes in this repository are available via nuget. After installing the theme you would like to use, configure and pass a theme instance to the [Website](https://genhttp.org/documentation/content/websites) builder.
